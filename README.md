@@ -98,7 +98,9 @@ História 3: Como usuário do sistema MapMyJourney, gostaria de ter a capacidade
  -	Criar a interface de visualização de perfil do usuário [Pedro]
  -	Criar a interface de edição de perfil, permitindo que o usuário atualize suas informações pessoais e adicione uma biografia ao seu perfil [Pedro]
 
-
-
 </details>
+
+## Modelo das principais telas
+
+Disponível no [Figma](www.figma.com/proto/bbIqawSkLUC54X5gcEUYGv/MapMyJourney).
 
