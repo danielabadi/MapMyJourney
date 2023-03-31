@@ -102,5 +102,5 @@ História 3: Como usuário do sistema MapMyJourney, gostaria de ter a capacidade
 
 ## Modelo das principais telas
 
-Disponível no [Figma](www.figma.com/proto/bbIqawSkLUC54X5gcEUYGv/MapMyJourney).
+Disponível no [Figma](https://www.figma.com/proto/bbIqawSkLUC54X5gcEUYGv/MapMyJourney).
 
