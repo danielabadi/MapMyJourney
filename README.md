@@ -40,8 +40,8 @@ Para o desenvolvimento do front-end serão utilizadas as tecnologias HTML, CSS e
 9. Como usuário do sistema MapMyJourney, gostaria de poder compartilhar meus marcadores em outras plataformas de mídia social, como Instagram ou Facebook, para que possa compartilhar minhas experiências com meus amigos e seguidores.
 10. Como usuário do sistema MapMyJourney, gostaria de receber recomendações sobre locais próximos que planejo visitar.
 11. Como usuário do sistema MapMyJourney, gostaria de receber sugestões de possíveis lugares a se visitar com base no meu perfil.
-12. Como usuário do sistema MapMyJourney, gostaria de salvar o estado do meu mapa em um PDF, podendo escolher a escala para poder imprimir ou compartilhar em outros canais.
-13. Como usuário do sistema MapMyJourney,gostaria de poder pesquisar por locais no mapa, para que possa encontrar rapidamente lugares de interesse ou descobrir novos destinos.
+12. Como usuário do sistema MapMyJourney, gostaria de salvar o estado do meu mapa em um PDF, podendo escolher a escala para que possa imprimir ou compartilhar em outros canais.
+13. Como usuário do sistema MapMyJourney, gostaria de poder pesquisar por locais no mapa, para que possa encontrar rapidamente lugares de interesse ou descobrir novos destinos.
 14. Como usuário do sistema MapMyJourney, gostaria de ter a opção de ocultar alguns dos meus marcadores ou torná-los privados, para que possa controlar quais informações compartilho com outras pessoas.
 15. Como usuário do sistema MapMyJourney, gostaria de poder configurar a densidade dos marcadores no mapa, para que possa ajustar a quantidade de informações exibidas de acordo com minhas preferências.
 16. Como usuário do sistema MapMyJourney, gostaria de poder escolher diferentes estilos de mapa, como mapa de estradas, mapa de satélite ou mapa de terreno, para que possa ver o mapa de diferentes perspectivas.
