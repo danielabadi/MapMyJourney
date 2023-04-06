@@ -7,7 +7,9 @@
     "dev": "nodemon -L index.ts",
     "start": "tsc && node dist/index.js",
     "lint": "eslint 'src/**/*.ts'",
-    "format": "prettier --config .prettierrc 'index.ts' 'src/**/*.ts' --write"
+    "format": "prettier --config .prettierrc 'index.ts' 'src/**/*.ts' --write",
+    "create-migration": "npx knex migrate:make --knexfile ./DbConfig.ts -x ts",
+    "run-migrations": "npx knex migrate:latest --knexfile ./DbConfig.ts"
   },
   "repository": {
     "type": "git",
@@ -33,6 +35,8 @@
     "typescript": "^5.0.3"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "knex": "^2.4.2",
+    "sqlite3": "^5.1.6"
   }
 }
