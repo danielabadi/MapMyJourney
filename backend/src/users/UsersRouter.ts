@@ -2,6 +2,9 @@ import { Request, Response, Router } from 'express';
 import { checkSchema } from 'express-validator';
 import { Knex } from 'knex';
 import { USERS_TABLE_NAME } from '../../database/consts/DbTableNames';
+import { EditUserCommandHandler } from './edit-user/EditUserCommandHandler';
+import { EditUserController, IEditUserController } from './edit-user/EditUserController';
+import { validateEditUser } from './edit-user/editUser.validators.middlewares';
 import { BcryptHashService, HashService } from './hash-service/HashService';
 import { RegisterUserCommandHandler } from './register-user/RegisterUserCommandHandler';
 import { IRegisterUserController, RegisterUserController } from './register-user/RegisterUserController';
@@ -44,6 +47,12 @@ export class UsersRouter {
         );
     }
 
+    private static setupEditUserRoute(editUserController: IEditUserController, router: Router) {
+        router.put(USERS_ROUTE, checkLogin, checkSchema(validateEditUser), async (req: Request, res: Response) => {
+            return await editUserController.editUser(req, res);
+        });
+    }
+
     public static route(db: Knex): Router {
         const router: Router = Router();
 
@@ -54,6 +63,11 @@ export class UsersRouter {
             new RegisterUserCommandHandler(userProfileRepository, hashService, emailUniquenessChecker),
         );
         this.setupRegisterUserRoute(registerUserController, router);
+
+        const editUserController: IEditUserController = new EditUserController(
+            new EditUserCommandHandler(userProfileRepository, hashService),
+        );
+        this.setupEditUserRoute(editUserController, router);
 
         const loginController: ILoginController = new LoginController(
             new UserSessionAuthenticationService(userProfileRepository, hashService),
