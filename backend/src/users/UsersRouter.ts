@@ -8,8 +8,9 @@ import { IRegisterUserController, RegisterUserController } from './register-user
 import { validateRegisterUser } from './register-user/registerUser.validators.middlewares';
 import { ILoginController, LoginController } from './user-access/login/LoginController';
 import { validateLogin } from './user-access/login/login.validators.middlewares';
+import { ILogoutController, LogoutController } from './user-access/logout/LogoutController';
 import { UserSessionAuthenticationService } from './user-access/user-session/UserSessionService';
-import { checkNotLogin } from './user-access/user-session/checkSession.middleware';
+import { checkLogin, checkNotLogin } from './user-access/user-session/checkSession.middleware';
 import { EmailUniquenessChecker, IEmailUniquenessChecker } from './user-profile/EmailUniquenessChecker';
 import { SQLUserProfileRepository, UserProfileRepository } from './user-profile/UserProfileRepository';
 
@@ -23,6 +24,12 @@ export class UsersRouter {
     private static setupLoginRoute(loginController: ILoginController, router: Router) {
         router.post(LOGIN_ROUTE, checkNotLogin, checkSchema(validateLogin), async (req: Request, res: Response) => {
             return await loginController.login(req, res);
+        });
+    }
+
+    private static setupLogoutRoute(logoutController: ILogoutController, router: Router) {
+        router.post(LOGOUT_ROUTE, checkLogin, (req: Request, res: Response) => {
+            return logoutController.logout(req, res);
         });
     }
 
@@ -52,6 +59,9 @@ export class UsersRouter {
             new UserSessionAuthenticationService(userProfileRepository, hashService),
         );
         this.setupLoginRoute(loginController, router);
+
+        const logoutController: ILogoutController = new LogoutController();
+        this.setupLogoutRoute(logoutController, router);
 
         return router;
     }
