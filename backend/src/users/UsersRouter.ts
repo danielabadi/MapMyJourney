@@ -6,6 +6,7 @@ import { BcryptHashService, HashService } from './hash-service/HashService';
 import { RegisterUserCommandHandler } from './register-user/RegisterUserCommandHandler';
 import { IRegisterUserController, RegisterUserController } from './register-user/RegisterUserController';
 import { validateRegisterUser } from './register-user/registerUser.validators.middlewares';
+import { checkNotLogin } from './user-access/user-session/checkSession.middleware';
 import { EmailUniquenessChecker, IEmailUniquenessChecker } from './user-profile/EmailUniquenessChecker';
 import { SQLUserProfileRepository, UserProfileRepository } from './user-profile/UserProfileRepository';
 
@@ -17,9 +18,14 @@ export const LOGOUT_ROUTE = '/logout';
 
 export class UsersRouter {
     private static setupRegisterUserRoute(registerUserController: IRegisterUserController, router: Router) {
-        router.post(USERS_ROUTE, checkSchema(validateRegisterUser), async (req: Request, res: Response) => {
-            return await registerUserController.registerUser(req, res);
-        });
+        router.post(
+            USERS_ROUTE,
+            checkNotLogin,
+            checkSchema(validateRegisterUser),
+            async (req: Request, res: Response) => {
+                return await registerUserController.registerUser(req, res);
+            },
+        );
     }
 
     public static route(db: Knex): Router {
