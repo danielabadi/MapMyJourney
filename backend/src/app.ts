@@ -1,10 +1,20 @@
-import express, { Express } from 'express';
+import express, { Express, Router } from 'express';
+import dbConfig from '../DbConfig';
+import { DbProvider } from '../database/DbProvider';
+import { AppRouter } from './AppRouter';
 
 export class App {
     private server: Express;
 
-    public constructor() {
+    public constructor(router: Router) {
         this.server = express();
+        this.setupApp(router);
+    }
+
+    private setupApp(router: Router) {
+        this.server.use(express.urlencoded({ extended: true }));
+        this.server.use(express.json());
+        this.server.use(router);
     }
 
     public getServer(): Express {
@@ -19,4 +29,8 @@ export class App {
             .on('error', console.log);
     }
 }
-export const app = new App();
+
+const db = DbProvider.get(dbConfig['development']);
+const router: Router = AppRouter.route(db);
+
+export const app = new App(router);
