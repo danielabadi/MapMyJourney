@@ -5,6 +5,8 @@ import { IRegisterMarkerController, RegisterMarkerController } from './register-
 import { MarkerRepository, SQLMarkerRepository } from './marker/MarkerRepository';
 import { MARKERS_TABLE_NAME } from '../../database/consts/DbTableNames';
 import { RegisterMarkerCommandHandler } from './register-marker/RegisterMarkerCommandHandler';
+import { IEditMarkerController, EditMarkerController } from './edit-marker/EditMarkerController';
+import { EditMarkerCommandHandler } from './edit-marker/EditMarkerCommandHandler';
 
 const URI_v1 = '/api/v1';
 export const MARKERS_ROUTE = URI_v1 + '/markers';
@@ -13,6 +15,12 @@ export class MarkerRouter {
     private static setUpRegisterMarkerRoute(registerMarkerController: IRegisterMarkerController, router: Router) {
         router.post(MARKERS_ROUTE, checkLogin, async (req: Request, res: Response) => {
             return await registerMarkerController.registerMarker(req, res);
+        });
+    }
+
+    private static setUpEditMarkerRoute(editMarkerController: IEditMarkerController, router: Router) {
+        router.put(MARKERS_ROUTE, checkLogin, async (req: Request, res: Response) => {
+            return await editMarkerController.editMarker(req, res);
         });
     }
 
@@ -25,6 +33,11 @@ export class MarkerRouter {
             new RegisterMarkerCommandHandler(markerRepository),
         );
         this.setUpRegisterMarkerRoute(registerMarkerController, router);
+
+        const editMarkerController: IEditMarkerController = new EditMarkerController(
+            new EditMarkerCommandHandler(markerRepository)
+        );
+        this.setUpEditMarkerRoute(editMarkerController, router);
 
         return router;
     }
