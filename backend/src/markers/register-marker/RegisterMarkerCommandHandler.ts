@@ -5,14 +5,14 @@ import { MarkerRepository } from '../marker/MarkerRepository';
 import { Marker } from '../marker/Marker';
 import { v4 as uuidv4 } from 'uuid';
 
-export class RegisterMarkerCommandHandler implements HandlesCommand<RegisterMarkerCommand, Promise<MarkerId>> {
+export class RegisterMarkerCommandHandler implements HandlesCommand<RegisterMarkerCommand, Promise<Marker | null>> {
     private readonly markerRepository: MarkerRepository;
 
     public constructor(markerRepository: MarkerRepository) {
         this.markerRepository = markerRepository;
     }
 
-    public async handle(command: RegisterMarkerCommand): Promise<MarkerId> {
+    public async handle(command: RegisterMarkerCommand): Promise<Marker | null> {
         const markerToBeRegistered = Marker.create(
             command.userId,
             MarkerId.create(uuidv4()),
@@ -24,7 +24,8 @@ export class RegisterMarkerCommandHandler implements HandlesCommand<RegisterMark
             command.position,
         );
 
-        const registeredMarker: MarkerId = await this.markerRepository.insert(markerToBeRegistered);
+        const registeredIdMarker: MarkerId = await this.markerRepository.insert(markerToBeRegistered);
+        const registeredMarker: Marker | null = await this.markerRepository.getById(registeredIdMarker);
         return registeredMarker;
     }
 }
