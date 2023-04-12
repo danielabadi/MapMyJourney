@@ -7,6 +7,8 @@ import { MARKERS_TABLE_NAME } from '../../database/consts/DbTableNames';
 import { RegisterMarkerCommandHandler } from './register-marker/RegisterMarkerCommandHandler';
 import { IEditMarkerController, EditMarkerController } from './edit-marker/EditMarkerController';
 import { EditMarkerCommandHandler } from './edit-marker/EditMarkerCommandHandler';
+import { GetMarkerController, IGetMarkerController } from './get-marker/GetMarkerController';
+import { GetMarkerCommandHandler } from './get-marker/GetMarkerCommandHandler';
 
 const URI_v1 = '/api/v1';
 export const MARKERS_ROUTE = URI_v1 + '/markers';
@@ -24,6 +26,12 @@ export class MarkerRouter {
         });
     }
 
+    private static setUpGetMarkerRoute(getMarkerController: IGetMarkerController, router: Router) {
+        router.get(MARKERS_ROUTE, checkLogin, async (req: Request, res: Response) => {
+            return await getMarkerController.getMarker(req, res);
+        });
+    }
+
     public static route(db: Knex): Router {
         const router: Router = Router();
 
@@ -38,6 +46,11 @@ export class MarkerRouter {
             new EditMarkerCommandHandler(markerRepository)
         );
         this.setUpEditMarkerRoute(editMarkerController, router);
+
+        const getMarkercontroller: IGetMarkerController = new GetMarkerController(
+            new GetMarkerCommandHandler(markerRepository),
+        );
+        this.setUpGetMarkerRoute(getMarkercontroller, router);
 
         return router;
     }
