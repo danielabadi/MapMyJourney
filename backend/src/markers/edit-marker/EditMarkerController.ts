@@ -1,25 +1,25 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
-import { HandlesCommand } from '../../common/HandlesCommand';
 import { ErrorHandler } from '../../errors/ErrorHandler';
 import { UserId } from '../../users/user-profile/UserId';
+import { Marker } from '../marker/Marker';
 import { MarkerId } from '../marker/MarkerId';
 import { MarkerPosition } from '../marker/MarkerPosition';
 import { MarkerStatus } from '../marker/MarkerStatus';
 import { MarkerTitle } from '../marker/MarkerTitle';
 import { EditMarkerCommand } from './EditMarkerCommand';
+import { IEditMarkerCommandHandler } from './EditMarkerCommandHandler';
 import { EditMarkerRequest } from './EditMarkerRequest';
 import { EditMarkerResponse } from './EditMarkerResponse';
-import { Marker } from '../marker/Marker';
 
 export interface IEditMarkerController {
     editMarker(req: Request, res: Response): Promise<Response>;
 }
 
 export class EditMarkerController implements IEditMarkerController {
-    private readonly commandHandler: HandlesCommand<EditMarkerCommand, Promise<Marker | null>>;
+    private readonly commandHandler: IEditMarkerCommandHandler;
 
-    public constructor(commandHandler: HandlesCommand<EditMarkerCommand, Promise<Marker | null>>) {
+    public constructor(commandHandler: IEditMarkerCommandHandler) {
         this.commandHandler = commandHandler;
     }
 
@@ -41,23 +41,31 @@ export class EditMarkerController implements IEditMarkerController {
                 new Date(editMarkerRequest.start_date),
                 new Date(editMarkerRequest.end_date),
                 MarkerPosition.create(editMarkerRequest.lat, editMarkerRequest.lng),
+                [],
             );
 
             const editedMarker: Marker | null = await this.commandHandler.handle(command);
-            const editMarkerResponse: EditMarkerResponse = { 
-                userId: editedMarker!.user_id.id,
-                id: editedMarker!.id.id,
-                status: editedMarker!.status.status,
-                title: editedMarker!.title.title,
-                description: editedMarker!.description,
-                start_date: editedMarker!.start_date,
-                end_date: editedMarker!.end_date,
-                lat: Number(editedMarker!.position.lat),
-                lng: Number(editedMarker!.position.lng),
-             };
+            const editMarkerResponse: EditMarkerResponse = this.toResponse(editedMarker!);
             return res.status(200).json({ success: true, data: editMarkerResponse });
         } catch (err) {
             return ErrorHandler.handleStandardFailure(err, res);
         }
+    }
+
+    private toResponse(domainModel: Marker): EditMarkerResponse {
+        return {
+            userId: domainModel.userId.id,
+            id: domainModel.id.id,
+            status: domainModel.status.status,
+            title: domainModel.title.title,
+            description: domainModel.description,
+            start_date: domainModel.start_date,
+            end_date: domainModel.end_date,
+            lat: domainModel.position.lat,
+            lng: domainModel.position.lng,
+            photos: domainModel.photos.map((photo) => {
+                return photo.filename;
+            }),
+        };
     }
 }

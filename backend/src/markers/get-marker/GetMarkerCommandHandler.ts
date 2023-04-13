@@ -1,10 +1,11 @@
 import { HandlesCommand } from '../../common/HandlesCommand';
-import { GetMarkerCommand } from './GetMarkerCommand';
-import { MarkerRepository } from '../marker/MarkerRepository';
 import { Marker } from '../marker/Marker';
-import { UserId } from '../../users/user-profile/UserId';
+import { MarkerRepository } from '../marker/MarkerRepository';
+import { GetMarkerCommand } from './GetMarkerCommand';
 
-export class GetMarkerCommandHandler implements HandlesCommand<GetMarkerCommand, Promise<Marker[] | null>> {
+export type IGetMarkerCommandHandler = HandlesCommand<GetMarkerCommand, Promise<Marker[] | null>>;
+
+export class GetMarkerCommandHandler implements IGetMarkerCommandHandler {
     private readonly markerRepository: MarkerRepository;
 
     public constructor(markerRepository: MarkerRepository) {
@@ -12,9 +13,7 @@ export class GetMarkerCommandHandler implements HandlesCommand<GetMarkerCommand,
     }
 
     public async handle(command: GetMarkerCommand): Promise<Marker[] | null> {
-        const userId = UserId.create(
-            command.userId.id
-        );
+        const userId = command.userId;
 
         const registeredMarker: Marker[] | null = await this.markerRepository.getByUserId(userId);
         return registeredMarker;

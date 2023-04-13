@@ -1,37 +1,60 @@
 import { Knex } from 'knex';
-import { MarkerId } from './MarkerId';
-import { Marker } from './Marker';
-import { MarkerPersistence } from './MarkerPersistence';
+import { FileSystemConfig } from '../../common/FileSystemConfig';
 import { UserId } from '../../users/user-profile/UserId';
+import { Marker } from './Marker';
+import { MarkerId } from './MarkerId';
+import { MarkerPersistence } from './MarkerPersistence';
+import { MarkerPhoto } from './MarkerPhoto';
+import { MarkerPhotoPersistence } from './MarkerPhotoPersistence';
+import { MarkerPosition } from './MarkerPosition';
 import { MarkerStatus } from './MarkerStatus';
 import { MarkerTitle } from './MarkerTitle';
-import { MarkerPosition } from './MarkerPosition';
 
 export interface MarkerRepository {
-    insert(Marker: Marker): Promise<MarkerId>;
-    update(Marker: Marker): Promise<MarkerId>;
+    insert(marker: Marker): Promise<MarkerId>;
+    update(marker: Marker): Promise<MarkerId>;
     getById(markerId: MarkerId): Promise<Marker | null>;
     getByUserId(userId: UserId): Promise<Marker[] | null>;
 }
 
 export class SQLMarkerRepository implements MarkerRepository {
     private readonly knex: Knex;
-    private readonly tableName: string;
+    private readonly fileSystemConfig: FileSystemConfig;
+    private readonly markersTableName: string;
+    private readonly photosTableName: string;
 
-    public constructor(knex: Knex, tableName: string) {
+    public constructor(
+        knex: Knex,
+        fileSystemConfig: FileSystemConfig,
+        markersTableName: string,
+        photosTableName: string,
+    ) {
         this.knex = knex;
-        this.tableName = tableName;
+        this.fileSystemConfig = fileSystemConfig;
+        this.markersTableName = markersTableName;
+        this.photosTableName = photosTableName;
     }
 
     MarkerPersistence = () => {
-        return this.knex<MarkerPersistence>(this.tableName);
+        return this.knex<MarkerPersistence>(this.markersTableName);
+    };
+
+    MarkerPhotoPersistence = () => {
+        return this.knex<MarkerPhotoPersistence>(this.photosTableName);
     };
 
     public async insert(marker: Marker): Promise<MarkerId> {
-        const persistenceModel: MarkerPersistence = this.toPersistence(marker);
+        const persistenceModel: MarkerPersistence = this.toMarkerPersistence(marker);
 
         const createdMarker: any[] = await this.knex.transaction(async (trx) => {
-            const createdMarker = await trx<MarkerPersistence>(this.tableName).insert(persistenceModel, 'id');
+            const createdMarker = await trx<MarkerPersistence>(this.markersTableName).insert(persistenceModel, 'id');
+
+            const persistencePhotos: MarkerPhotoPersistence[] = marker.photos.map((element) =>
+                this.toMarkerPhotoPersistence(marker, element),
+            );
+            if (persistencePhotos.length > 0) {
+                await trx<MarkerPhotoPersistence>(this.photosTableName).insert(persistencePhotos);
+            }
             return createdMarker;
         });
         const createdMarkerId = createdMarker[0];
@@ -40,12 +63,32 @@ export class SQLMarkerRepository implements MarkerRepository {
     }
 
     public async update(marker: Marker): Promise<MarkerId> {
-        const persistenceModel: MarkerPersistence = this.toPersistence(marker);
+        const persistenceModel: MarkerPersistence = this.toMarkerPersistence(marker);
 
         const updatedMarker: any[] = await this.knex.transaction(async (trx) => {
-            const updatedMarker = await trx<MarkerPersistence>(this.tableName)
+            const updatedMarker = await trx<MarkerPersistence>(this.markersTableName)
                 .where('id', persistenceModel.id)
                 .update(persistenceModel, 'id');
+
+            const persistencePhotos: MarkerPhotoPersistence[] = marker.photos.map((element) =>
+                this.toMarkerPhotoPersistence(marker, element),
+            );
+            const currentPersistedPhotos: MarkerPhotoPersistence[] = await trx<MarkerPhotoPersistence>(
+                this.photosTableName,
+            ).where('marker_id', persistenceModel.id);
+            if (currentPersistedPhotos.length > 0) {
+                currentPersistedPhotos.forEach((photo) =>
+                    this.fileSystemConfig.removeFile(this.fileSystemConfig.getUploadPath() + photo.filename),
+                );
+
+                await trx<MarkerPhotoPersistence>(this.photosTableName)
+                    .where('marker_id', persistenceModel.id)
+                    .delete();
+            }
+            if (persistencePhotos.length > 0) {
+                await trx<MarkerPhotoPersistence>(this.photosTableName).insert(persistencePhotos);
+            }
+
             return updatedMarker;
         });
         const updatedMarkerId = updatedMarker[0];
@@ -59,7 +102,12 @@ export class SQLMarkerRepository implements MarkerRepository {
         if (persistedModel === undefined) {
             return null;
         }
-        const domainModel = this.toDomain(persistedModel);
+        const persistedPhotos: null | MarkerPhotoPersistence[] = await this.MarkerPhotoPersistence().where(
+            'marker_id',
+            markerId.id,
+        );
+
+        const domainModel = this.toDomain(persistedModel, persistedPhotos == null ? [] : persistedPhotos);
 
         return domainModel;
     }
@@ -71,14 +119,19 @@ export class SQLMarkerRepository implements MarkerRepository {
             return null;
         }
 
-        const markers: Marker[] = persistedModel.map((element) => {
-            return this.toDomain(element);
+        const markerPromises: Promise<Marker>[] = persistedModel.map(async (element) => {
+            const persistedPhotos: null | MarkerPhotoPersistence[] = await this.MarkerPhotoPersistence().where(
+                'marker_id',
+                element.id,
+            );
+            return this.toDomain(element, persistedPhotos == null ? [] : persistedPhotos);
         });
+        const markers: Marker[] = await Promise.all(markerPromises);
 
         return markers;
     }
 
-    private toDomain(persistedModel: MarkerPersistence): Marker {
+    private toDomain(persistedModel: MarkerPersistence, photos: MarkerPhotoPersistence[]): Marker {
         return Marker.create(
             UserId.create(persistedModel.user_id),
             MarkerId.create(persistedModel.id),
@@ -88,12 +141,13 @@ export class SQLMarkerRepository implements MarkerRepository {
             new Date(persistedModel.start_date),
             new Date(persistedModel.end_date),
             MarkerPosition.create(persistedModel.lat, persistedModel.lng),
+            photos.map((element) => MarkerPhoto.create(element.filename)),
         );
     }
 
-    private toPersistence(domainModel: Marker): MarkerPersistence {
+    private toMarkerPersistence(domainModel: Marker): MarkerPersistence {
         return {
-            user_id: domainModel.user_id.id,
+            user_id: domainModel.userId.id,
             id: domainModel.id.id,
             status: domainModel.status.status,
             title: domainModel.title.title,
@@ -102,6 +156,13 @@ export class SQLMarkerRepository implements MarkerRepository {
             end_date: domainModel.end_date.toISOString(),
             lat: domainModel.position.lat,
             lng: domainModel.position.lng,
+        };
+    }
+
+    private toMarkerPhotoPersistence(domainModel: Marker, photo: MarkerPhoto): MarkerPhotoPersistence {
+        return {
+            filename: photo.filename,
+            marker_id: domainModel.id.id,
         };
     }
 }

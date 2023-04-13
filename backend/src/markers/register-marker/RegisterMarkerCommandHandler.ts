@@ -1,11 +1,13 @@
-import { HandlesCommand } from '../../common/HandlesCommand';
-import { MarkerId } from '../marker/MarkerId';
-import { RegisterMarkerCommand } from './RegisterMarkerCommand';
-import { MarkerRepository } from '../marker/MarkerRepository';
-import { Marker } from '../marker/Marker';
 import { v4 as uuidv4 } from 'uuid';
+import { HandlesCommand } from '../../common/HandlesCommand';
+import { Marker } from '../marker/Marker';
+import { MarkerId } from '../marker/MarkerId';
+import { MarkerRepository } from '../marker/MarkerRepository';
+import { RegisterMarkerCommand } from './RegisterMarkerCommand';
 
-export class RegisterMarkerCommandHandler implements HandlesCommand<RegisterMarkerCommand, Promise<Marker | null>> {
+export type IRegisterMarkerCommandHandler = HandlesCommand<RegisterMarkerCommand, Promise<Marker | null>>;
+
+export class RegisterMarkerCommandHandler implements IRegisterMarkerCommandHandler {
     private readonly markerRepository: MarkerRepository;
 
     public constructor(markerRepository: MarkerRepository) {
@@ -18,10 +20,11 @@ export class RegisterMarkerCommandHandler implements HandlesCommand<RegisterMark
             MarkerId.create(uuidv4()),
             command.status,
             command.title,
-            command.desription,
+            command.description,
             command.start_date,
             command.end_date,
             command.position,
+            command.photos,
         );
 
         const registeredIdMarker: MarkerId = await this.markerRepository.insert(markerToBeRegistered);

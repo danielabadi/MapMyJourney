@@ -8,4 +8,5 @@ export type RegisterMarkerResponse = {
     end_date: Date;
     lat: number;
     lng: number;
+    photos: string[];
 };

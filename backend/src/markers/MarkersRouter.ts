@@ -1,14 +1,15 @@
 import { Request, Response, Router } from 'express';
 import { Knex } from 'knex';
+import { MARKERS_TABLE_NAME, PHOTOS_TABLE_NAME } from '../../database/consts/DbTableNames';
+import { FileSystemConfig } from '../common/FileSystemConfig';
 import { checkLogin } from '../users/user-access/user-session/checkSession.middleware';
-import { IRegisterMarkerController, RegisterMarkerController } from './register-marker/RegisterMarkerController';
-import { MarkerRepository, SQLMarkerRepository } from './marker/MarkerRepository';
-import { MARKERS_TABLE_NAME } from '../../database/consts/DbTableNames';
-import { RegisterMarkerCommandHandler } from './register-marker/RegisterMarkerCommandHandler';
-import { IEditMarkerController, EditMarkerController } from './edit-marker/EditMarkerController';
 import { EditMarkerCommandHandler } from './edit-marker/EditMarkerCommandHandler';
-import { GetMarkerController, IGetMarkerController } from './get-marker/GetMarkerController';
+import { EditMarkerController, IEditMarkerController } from './edit-marker/EditMarkerController';
 import { GetMarkerCommandHandler } from './get-marker/GetMarkerCommandHandler';
+import { GetMarkerController, IGetMarkerController } from './get-marker/GetMarkerController';
+import { MarkerRepository, SQLMarkerRepository } from './marker/MarkerRepository';
+import { RegisterMarkerCommandHandler } from './register-marker/RegisterMarkerCommandHandler';
+import { IRegisterMarkerController, RegisterMarkerController } from './register-marker/RegisterMarkerController';
 
 const URI_v1 = '/api/v1';
 export const MARKERS_ROUTE = URI_v1 + '/markers';
@@ -32,10 +33,15 @@ export class MarkerRouter {
         });
     }
 
-    public static route(db: Knex): Router {
+    public static route(db: Knex, fileSystemConfig: FileSystemConfig): Router {
         const router: Router = Router();
 
-        const markerRepository: MarkerRepository = new SQLMarkerRepository(db, MARKERS_TABLE_NAME);
+        const markerRepository: MarkerRepository = new SQLMarkerRepository(
+            db,
+            fileSystemConfig,
+            MARKERS_TABLE_NAME,
+            PHOTOS_TABLE_NAME,
+        );
 
         const registerMarkerController: IRegisterMarkerController = new RegisterMarkerController(
             new RegisterMarkerCommandHandler(markerRepository),
@@ -43,7 +49,7 @@ export class MarkerRouter {
         this.setUpRegisterMarkerRoute(registerMarkerController, router);
 
         const editMarkerController: IEditMarkerController = new EditMarkerController(
-            new EditMarkerCommandHandler(markerRepository)
+            new EditMarkerCommandHandler(markerRepository),
         );
         this.setUpEditMarkerRoute(editMarkerController, router);
 

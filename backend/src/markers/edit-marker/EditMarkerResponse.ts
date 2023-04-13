@@ -8,4 +8,5 @@ export type EditMarkerResponse = {
     end_date: Date;
     lat: number;
     lng: number;
+    photos: string[];
 };

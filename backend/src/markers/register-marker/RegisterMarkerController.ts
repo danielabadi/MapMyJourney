@@ -1,24 +1,24 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
-import { HandlesCommand } from '../../common/HandlesCommand';
-import { Marker } from '../marker/Marker';
 import { ErrorHandler } from '../../errors/ErrorHandler';
-import { RegisterMarkerRequest } from './RegisterMarkerRequest';
-import { RegisterMarkerResponse } from './RegisterMarkerResponse';
-import { RegisterMarkerCommand } from './RegisterMarkerCommand';
 import { UserId } from '../../users/user-profile/UserId';
+import { Marker } from '../marker/Marker';
+import { MarkerPosition } from '../marker/MarkerPosition';
 import { MarkerStatus } from '../marker/MarkerStatus';
 import { MarkerTitle } from '../marker/MarkerTitle';
-import { MarkerPosition } from '../marker/MarkerPosition';
+import { RegisterMarkerCommand } from './RegisterMarkerCommand';
+import { IRegisterMarkerCommandHandler } from './RegisterMarkerCommandHandler';
+import { RegisterMarkerRequest } from './RegisterMarkerRequest';
+import { RegisterMarkerResponse } from './RegisterMarkerResponse';
 
 export interface IRegisterMarkerController {
     registerMarker(req: Request, res: Response): Promise<Response>;
 }
 
 export class RegisterMarkerController implements IRegisterMarkerController {
-    private readonly commandHandler: HandlesCommand<RegisterMarkerCommand, Promise<Marker | null>>;
+    private readonly commandHandler: IRegisterMarkerCommandHandler;
 
-    public constructor(commandHandler: HandlesCommand<RegisterMarkerCommand, Promise<Marker | null>>) {
+    public constructor(commandHandler: IRegisterMarkerCommandHandler) {
         this.commandHandler = commandHandler;
     }
 
@@ -38,23 +38,31 @@ export class RegisterMarkerController implements IRegisterMarkerController {
                 new Date(registerMarkerRequest.start_date),
                 new Date(registerMarkerRequest.end_date),
                 MarkerPosition.create(registerMarkerRequest.lat, registerMarkerRequest.lng),
+                [],
             );
 
             const createdMarker: Marker | null = await this.commandHandler.handle(command);
-            const registerMarkerResponse: RegisterMarkerResponse = { 
-                userId: createdMarker!.user_id.id,
-                id: createdMarker!.id.id,
-                status: createdMarker!.status.status,
-                title: createdMarker!.title.title,
-                description: createdMarker!.description,
-                start_date: createdMarker!.start_date,
-                end_date: createdMarker!.end_date,
-                lat: Number(createdMarker!.position.lat),
-                lng: Number(createdMarker!.position.lng),
-            };
+            const registerMarkerResponse: RegisterMarkerResponse = this.toResponse(createdMarker!);
             return res.status(200).json({ success: true, data: registerMarkerResponse });
         } catch (err) {
             return ErrorHandler.handleStandardFailure(err, res);
         }
+    }
+
+    private toResponse(domainModel: Marker): RegisterMarkerResponse {
+        return {
+            userId: domainModel.userId.id,
+            id: domainModel.id.id,
+            status: domainModel.status.status,
+            title: domainModel.title.title,
+            description: domainModel.description,
+            start_date: domainModel.start_date,
+            end_date: domainModel.end_date,
+            lat: domainModel.position.lat,
+            lng: domainModel.position.lng,
+            photos: domainModel.photos.map((photo) => {
+                return photo.filename;
+            }),
+        };
     }
 }

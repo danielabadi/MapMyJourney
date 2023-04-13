@@ -1,10 +1,12 @@
 import { HandlesCommand } from '../../common/HandlesCommand';
-import { MarkerId } from '../marker/MarkerId';
-import { EditMarkerCommand } from './EditMarkerCommand';
-import { MarkerRepository } from '../marker/MarkerRepository';
 import { Marker } from '../marker/Marker';
+import { MarkerId } from '../marker/MarkerId';
+import { MarkerRepository } from '../marker/MarkerRepository';
+import { EditMarkerCommand } from './EditMarkerCommand';
 
-export class EditMarkerCommandHandler implements HandlesCommand<EditMarkerCommand, Promise<Marker | null>> {
+export type IEditMarkerCommandHandler = HandlesCommand<EditMarkerCommand, Promise<Marker | null>>;
+
+export class EditMarkerCommandHandler implements IEditMarkerCommandHandler {
     private readonly markerRepository: MarkerRepository;
 
     public constructor(markerRepository: MarkerRepository) {
@@ -21,10 +23,11 @@ export class EditMarkerCommandHandler implements HandlesCommand<EditMarkerComman
             command.markerId,
             command.status,
             command.title,
-            command.desription,
+            command.description,
             command.start_date,
             command.end_date,
             command.position,
+            command.photos,
         );
 
         const editedIdMarker: MarkerId = await this.markerRepository.update(editedMarker);
