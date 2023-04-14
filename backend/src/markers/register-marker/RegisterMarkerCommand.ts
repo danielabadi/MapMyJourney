@@ -10,8 +10,8 @@ export class RegisterMarkerCommand implements Command {
     public readonly status: MarkerStatus;
     public readonly title: MarkerTitle;
     public readonly description: string;
-    public readonly start_date: Date;
-    public readonly end_date: Date;
+    public readonly start_date: Date | null;
+    public readonly end_date: Date | null;
     public readonly position: MarkerPosition;
     public readonly photos: MarkerPhoto[];
 
@@ -20,8 +20,8 @@ export class RegisterMarkerCommand implements Command {
         status: MarkerStatus,
         title: MarkerTitle,
         description: string,
-        start_date: Date,
-        end_date: Date,
+        start_date: Date | null,
+        end_date: Date | null,
         position: MarkerPosition,
         photos: MarkerPhoto[],
     ) {
