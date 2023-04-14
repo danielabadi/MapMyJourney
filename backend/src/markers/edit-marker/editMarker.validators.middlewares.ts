@@ -24,12 +24,14 @@ export const validateEditMarker: Schema = {
         },
     },
     start_date: {
+        optional: true,
         isISO8601: {
             errorMessage: 'O campo de data de ida deve estar no formato ISO8601',
             bail: true,
         },
     },
     end_date: {
+        optional: true,
         isISO8601: {
             errorMessage: 'O campo de data de volta deve estar no formato ISO8601',
             bail: true,

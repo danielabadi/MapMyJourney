@@ -138,8 +138,8 @@ export class SQLMarkerRepository implements MarkerRepository {
             MarkerStatus.create(persistedModel.status),
             MarkerTitle.create(persistedModel.title),
             persistedModel.description,
-            new Date(persistedModel.start_date),
-            new Date(persistedModel.end_date),
+            persistedModel.start_date == null ? null : new Date(persistedModel.start_date),
+            persistedModel.end_date == null ? null : new Date(persistedModel.end_date),
             MarkerPosition.create(persistedModel.lat, persistedModel.lng),
             photos.map((element) => MarkerPhoto.create(element.filename)),
         );
@@ -152,8 +152,8 @@ export class SQLMarkerRepository implements MarkerRepository {
             status: domainModel.status.status,
             title: domainModel.title.title,
             description: domainModel.description,
-            start_date: domainModel.start_date.toISOString(),
-            end_date: domainModel.end_date.toISOString(),
+            start_date: domainModel.start_date == null ? null : domainModel.start_date.toISOString(),
+            end_date: domainModel.end_date == null ? null : domainModel.end_date.toISOString(),
             lat: domainModel.position.lat,
             lng: domainModel.position.lng,
         };
