@@ -4,6 +4,7 @@ import { ErrorHandler } from '../../errors/ErrorHandler';
 import { UserId } from '../../users/user-profile/UserId';
 import { Marker } from '../marker/Marker';
 import { MarkerId } from '../marker/MarkerId';
+import { MarkerPhoto } from '../marker/MarkerPhoto';
 import { MarkerPosition } from '../marker/MarkerPosition';
 import { MarkerStatus } from '../marker/MarkerStatus';
 import { MarkerTitle } from '../marker/MarkerTitle';
@@ -30,6 +31,7 @@ export class EditMarkerController implements IEditMarkerController {
         }
 
         try {
+            const filenames = (req.files as Express.Multer.File[]).map((file: Express.Multer.File) => file.filename);
             const editMarkerRequest: EditMarkerRequest = req.body;
 
             const command: EditMarkerCommand = new EditMarkerCommand(
@@ -41,7 +43,7 @@ export class EditMarkerController implements IEditMarkerController {
                 new Date(editMarkerRequest.start_date),
                 new Date(editMarkerRequest.end_date),
                 MarkerPosition.create(editMarkerRequest.lat, editMarkerRequest.lng),
-                [],
+                filenames.map((filename) => MarkerPhoto.create(filename)),
             );
 
             const editedMarker: Marker | null = await this.commandHandler.handle(command);

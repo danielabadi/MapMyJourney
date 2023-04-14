@@ -3,6 +3,7 @@ import { validationResult } from 'express-validator';
 import { ErrorHandler } from '../../errors/ErrorHandler';
 import { UserId } from '../../users/user-profile/UserId';
 import { Marker } from '../marker/Marker';
+import { MarkerPhoto } from '../marker/MarkerPhoto';
 import { MarkerPosition } from '../marker/MarkerPosition';
 import { MarkerStatus } from '../marker/MarkerStatus';
 import { MarkerTitle } from '../marker/MarkerTitle';
@@ -29,6 +30,7 @@ export class RegisterMarkerController implements IRegisterMarkerController {
         }
 
         try {
+            const filenames = (req.files as Express.Multer.File[]).map((file: Express.Multer.File) => file.filename);
             const registerMarkerRequest: RegisterMarkerRequest = req.body;
             const command: RegisterMarkerCommand = new RegisterMarkerCommand(
                 UserId.create(req.session.userSession!.userId.id),
@@ -38,7 +40,7 @@ export class RegisterMarkerController implements IRegisterMarkerController {
                 new Date(registerMarkerRequest.start_date),
                 new Date(registerMarkerRequest.end_date),
                 MarkerPosition.create(registerMarkerRequest.lat, registerMarkerRequest.lng),
-                [],
+                filenames.map((filename) => MarkerPhoto.create(filename)),
             );
 
             const createdMarker: Marker | null = await this.commandHandler.handle(command);
