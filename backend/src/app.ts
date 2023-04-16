@@ -10,16 +10,17 @@ import { SESSION_CONFIG } from './users/user-access/user-session/sessions.config
 export class App {
     private server: Express;
 
-    public constructor(router: Router) {
+    public constructor(router: Router, fileSystemConfig: FileSystemConfig) {
         this.server = express();
-        this.setupApp(router);
+        this.setupApp(router, fileSystemConfig);
     }
 
-    private setupApp(router: Router) {
+    private setupApp(router: Router, fileSystemConfig: FileSystemConfig) {
         this.server.use(express.urlencoded({ extended: true }));
         this.server.use(express.json());
         this.server.use(session(SESSION_CONFIG));
         this.server.use(nocache());
+        this.server.use('/uploads', express.static(fileSystemConfig.getUploadPath()));
         this.server.use(router);
     }
 
@@ -40,4 +41,4 @@ const db = DbProvider.get(dbConfig['development']);
 const fileSystemConfig: FileSystemConfig = new PhotoUploadConfig(path.join(process.cwd(), '/uploads/'));
 const router: Router = AppRouter.route(db, fileSystemConfig);
 
-export const app = new App(router);
+export const app = new App(router, fileSystemConfig);
