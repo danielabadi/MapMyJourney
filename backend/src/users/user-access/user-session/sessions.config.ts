@@ -4,7 +4,7 @@ export const SESSION_CONFIG = {
     secret: ['veryimportantsecret', 'notsoimportantsecret', 'highlyprobablysecret'],
     name: 'cookieName',
     cookie: {
-        httpOnly: true,
+        httpOnly: false,
         maxAge: 600000, // Time is in miliseconds
     },
     resave: false,

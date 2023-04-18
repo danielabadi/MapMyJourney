@@ -12,6 +12,7 @@ import { validateRegisterUser } from './register-user/registerUser.validators.mi
 import { ILoginController, LoginController } from './user-access/login/LoginController';
 import { validateLogin } from './user-access/login/login.validators.middlewares';
 import { ILogoutController, LogoutController } from './user-access/logout/LogoutController';
+import { InMemoryUserSessionRepository, UserSessionRepository } from './user-access/user-session/UserSessionRepository';
 import { UserSessionAuthenticationService } from './user-access/user-session/UserSessionService';
 import { checkLogin, checkNotLogin } from './user-access/user-session/checkSession.middleware';
 import { EmailUniquenessChecker, IEmailUniquenessChecker } from './user-profile/EmailUniquenessChecker';
@@ -69,12 +70,16 @@ export class UsersRouter {
         );
         this.setupEditUserRoute(editUserController, router);
 
-        const loginController: ILoginController = new LoginController(
-            new UserSessionAuthenticationService(userProfileRepository, hashService),
+        const userSessionRepository: UserSessionRepository = new InMemoryUserSessionRepository();
+        const userSessionService = new UserSessionAuthenticationService(
+            userProfileRepository,
+            hashService,
+            userSessionRepository,
         );
+        const loginController: ILoginController = new LoginController(userSessionService);
         this.setupLoginRoute(loginController, router);
 
-        const logoutController: ILogoutController = new LogoutController();
+        const logoutController: ILogoutController = new LogoutController(userSessionService);
         this.setupLogoutRoute(logoutController, router);
 
         return router;

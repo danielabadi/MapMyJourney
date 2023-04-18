@@ -24,7 +24,7 @@ export class LoginController implements ILoginController {
         }
         try {
             const request: LoginRequest = { email: req.body.email, password: req.body.password };
-            const userSession: UserSession = await this.userSessionService.createSession(
+            const userSession: UserSession = await this.userSessionService.startSession(
                 Email.create(request.email),
                 request.password,
             );

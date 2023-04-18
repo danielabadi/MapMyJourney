@@ -3,21 +3,29 @@ import { Email } from '../../user-profile/Email';
 import { UserProfile } from '../../user-profile/UserProfile';
 import { UserProfileRepository } from '../../user-profile/UserProfileRepository';
 import { UserSession } from './UserSession';
+import { UserSessionRepository } from './UserSessionRepository';
 
 export interface UserSessionService {
-    createSession(email: Email, password: string): Promise<UserSession>;
+    startSession(email: Email, password: string): Promise<UserSession>;
+    endSession(userSession: UserSession): boolean;
 }
 
 export class UserSessionAuthenticationService implements UserSessionService {
     private readonly userProfileRepository: UserProfileRepository;
     private readonly hashService: HashService;
+    private readonly userSessionRepository: UserSessionRepository;
 
-    public constructor(userProfileRepository: UserProfileRepository, hashService: HashService) {
+    public constructor(
+        userProfileRepository: UserProfileRepository,
+        hashService: HashService,
+        userSessionRepository: UserSessionRepository,
+    ) {
         this.userProfileRepository = userProfileRepository;
         this.hashService = hashService;
+        this.userSessionRepository = userSessionRepository;
     }
 
-    public async createSession(email: Email, password: string): Promise<UserSession> {
+    public async startSession(email: Email, password: string): Promise<UserSession> {
         let user: UserProfile | null;
         try {
             user = await this.userProfileRepository.getByEmail(email);
@@ -36,6 +44,10 @@ export class UserSessionAuthenticationService implements UserSessionService {
         }
 
         const userSession: UserSession = new UserSession(existingUser.id, existingUser.email, existingUser.name);
-        return userSession;
+        return this.userSessionRepository.insert(userSession);
+    }
+
+    public endSession(userSession: UserSession): boolean {
+        return this.userSessionRepository.delete(userSession);
     }
 }
