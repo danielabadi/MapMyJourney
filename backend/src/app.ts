@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express, { Express, Router } from 'express';
 import session from 'express-session';
 import nocache from 'nocache';
@@ -20,6 +21,12 @@ export class App {
         this.server.use(express.json());
         this.server.use(session(SESSION_CONFIG));
         this.server.use(nocache());
+        this.server.use(
+            cors({
+                origin: ['http://localhost:3000'],
+                credentials: true,
+            }),
+        );
         this.server.use('/uploads', express.static(fileSystemConfig.getUploadPath()));
         this.server.use(router);
     }
