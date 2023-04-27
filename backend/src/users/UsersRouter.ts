@@ -5,6 +5,8 @@ import { USERS_TABLE_NAME } from '../../database/consts/DbTableNames';
 import { EditUserCommandHandler } from './edit-user/EditUserCommandHandler';
 import { EditUserController, IEditUserController } from './edit-user/EditUserController';
 import { validateEditUser } from './edit-user/editUser.validators.middlewares';
+import { GetUserCommandHandler } from './get-user/GetUserCommandHandler';
+import { GetUserController, IGetUserController } from './get-user/GetUserController';
 import { BcryptHashService, HashService } from './hash-service/HashService';
 import { RegisterUserCommandHandler } from './register-user/RegisterUserCommandHandler';
 import { IRegisterUserController, RegisterUserController } from './register-user/RegisterUserController';
@@ -54,6 +56,12 @@ export class UsersRouter {
         });
     }
 
+    private static setupGetUserRoute(getUserController: IGetUserController, router: Router) {
+        router.get(USERS_ROUTE, checkLogin, async (req: Request, res: Response) => {
+            return await getUserController.getUser(req, res);
+        });
+    }
+
     public static route(db: Knex): Router {
         const router: Router = Router();
 
@@ -69,6 +77,11 @@ export class UsersRouter {
             new EditUserCommandHandler(userProfileRepository, hashService),
         );
         this.setupEditUserRoute(editUserController, router);
+
+        const getUserController: IGetUserController = new GetUserController(
+            new GetUserCommandHandler(userProfileRepository),
+        );
+        this.setupGetUserRoute(getUserController, router);
 
         const userSessionRepository: UserSessionRepository = new InMemoryUserSessionRepository();
         const userSessionService = new UserSessionAuthenticationService(
