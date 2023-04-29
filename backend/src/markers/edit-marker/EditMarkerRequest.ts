@@ -3,8 +3,8 @@ export type EditMarkerRequest = {
     status: string;
     title: string;
     description: string;
-    start_date: string | null;
-    end_date: string | null;
+    start_date: string;
+    end_date: string;
     lat: number;
     lng: number;
 };

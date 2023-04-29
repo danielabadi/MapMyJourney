@@ -40,8 +40,8 @@ export class EditMarkerController implements IEditMarkerController {
                 MarkerStatus.create(editMarkerRequest.status),
                 MarkerTitle.create(editMarkerRequest.title),
                 editMarkerRequest.description,
-                editMarkerRequest.start_date == null ? null : new Date(editMarkerRequest.start_date),
-                editMarkerRequest.end_date === null ? null : new Date(editMarkerRequest.end_date),
+                editMarkerRequest.start_date == 'null' ? null : new Date(editMarkerRequest.start_date),
+                editMarkerRequest.end_date === 'null' ? null : new Date(editMarkerRequest.end_date),
                 MarkerPosition.create(editMarkerRequest.lat, editMarkerRequest.lng),
                 filenames.map((filename) => MarkerPhoto.create(filename)),
             );
