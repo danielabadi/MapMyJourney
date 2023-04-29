@@ -37,8 +37,8 @@ export class RegisterMarkerController implements IRegisterMarkerController {
                 MarkerStatus.create(registerMarkerRequest.status),
                 MarkerTitle.create(registerMarkerRequest.title),
                 registerMarkerRequest.description,
-                registerMarkerRequest.start_date == null ? null : new Date(registerMarkerRequest.start_date),
-                registerMarkerRequest.end_date == null ? null : new Date(registerMarkerRequest.end_date),
+                registerMarkerRequest.start_date == 'null' ? null : new Date(registerMarkerRequest.start_date),
+                registerMarkerRequest.end_date == 'null' ? null : new Date(registerMarkerRequest.end_date),
                 MarkerPosition.create(registerMarkerRequest.lat, registerMarkerRequest.lng),
                 filenames.map((filename) => MarkerPhoto.create(filename)),
             );
