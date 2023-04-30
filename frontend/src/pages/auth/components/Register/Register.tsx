@@ -15,6 +15,42 @@ import IRegisterForm, {
 import "./Register.css";
 import axios from "axios";
 
+const formStyles: SxProps<Theme> = {
+  display: "grid",
+  width: "75%",
+  height: "355px",
+  position: "relative",
+  top: "118px",
+};
+
+const buttonStyles: SxProps<Theme> = {
+  height: "30px",
+  backgroundColor: "#073064",
+  color: "#ffffff",
+  borderRadius: "5px",
+  padding: "10px 15px",
+  fontFamily: "Zen Kurenaido",
+  marginTop: "0px",
+  fontSize: "12px",
+
+  "&:hover": {
+    backgroundColor: "#073064",
+  },
+};
+
+const typographyStyles: SxProps<Theme> = {
+  position: "absolute",
+  top: "90px",
+  display: "block",
+  height: "34px",
+  fontStyle: "normal",
+  fontWeight: "400",
+  fontSize: "32px",
+  lineHeight: "calc(55vh*0.047)",
+  textAlign: "center",
+  fontFamily: "Zen Kurenaido",
+};
+
 const Register = () => {
   const setLoginRender = useSetRecoilState(loginRenderState);
   const handleLoginRender = () => {
@@ -48,7 +84,7 @@ const Register = () => {
   return (
     <Box className='registerBox'>
       <Logo />
-      <Typography>Criar Conta</Typography>
+      <Typography sx={typographyStyles}>Criar Conta</Typography>
       <Formik
         initialValues={{
           name: "",
@@ -70,7 +106,7 @@ const Register = () => {
           handleBlur,
           handleSubmit,
         }) => (
-          <Form onSubmit={handleSubmit} autoComplete={"off"}>
+          <Form onSubmit={handleSubmit} sx={formStyles} autoComplete={"off"}>
             <TextField
               id='name'
               data-testid='name'
@@ -142,7 +178,7 @@ const Register = () => {
               autoComplete='off'
               required
             />
-            <Button type='submit' size='large' fullWidth >
+            <Button type='submit' size='large' fullWidth sx={buttonStyles}>
               Registrar
             </Button>
           </Form>
