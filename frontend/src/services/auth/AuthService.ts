@@ -7,6 +7,11 @@ const login = async (body: LoginRequestDto) => {
     return response.data;
 };
 
+const logout = async () => {
+    const response = await apiClient.post("/logout", {}, {withCredentials: true});
+    return response.data;
+  };
+
 const register = async (body: RegisterRequestDto) => {
     const response = await apiClient.post("/users", body);
     return response.data;
@@ -14,6 +19,7 @@ const register = async (body: RegisterRequestDto) => {
   
 const AuthService = {
     login,
+    logout,
     register,
 };
 
