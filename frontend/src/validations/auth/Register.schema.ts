@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const RegisterFormSchema = yup.object({
+export const registerFormSchema = yup.object({
   name: yup.string().required("Nome é um campo obrigatório"),
   email: yup.string().email().required("Email é um campo obrigatório"),
   birthdate: yup
@@ -12,5 +12,5 @@ export const RegisterFormSchema = yup.object({
     .required("Confirmar senha é um campo obrigatório"),
 });
 
-type IRegisterForm = yup.InferType<typeof RegisterFormSchema>;
+type IRegisterForm = yup.InferType<typeof registerFormSchema>;
 export default IRegisterForm;

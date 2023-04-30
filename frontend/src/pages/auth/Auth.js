@@ -4,6 +4,7 @@ import React from "react";
 import * as Leaflet from 'leaflet';
 import "./Auth.css";
 import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
 
 function Auth() {
   const loginRender = useRecoilValue(loginRenderState);
@@ -34,7 +35,7 @@ function Auth() {
     <div className='background' id="background"></div>
     <div className='image'>
         {loginRender && <Login />}
-        {!loginRender && <>Register</>}
+        {!loginRender && <Register />}
       </div>
     </>
   );
