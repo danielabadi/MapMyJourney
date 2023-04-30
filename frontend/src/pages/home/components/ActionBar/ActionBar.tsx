@@ -13,6 +13,7 @@ import { useSetRecoilState } from "recoil";
 import useLogout from "../../../../services/auth/hooks/useLogout";
 import { isLoggedInState } from "../../../../states/auth/atom";
 import { userResponseDto } from "../../../../types/users/userResponseDto";
+import Menu from "../Menu/Menu";
 
 const boxStyles: SxProps<Theme> = {
   height: "49px",
@@ -121,6 +122,7 @@ const ActionBar = () => {
         <Avatar sx={avatarStyles} onClick={handleClickMenu}>
           {userData.name[0].toUpperCase()}
         </Avatar>
+        <Menu anchorElement={anchorElement} open={open} onClose={handleClose} />
         <IconButton sx={logoutButtonStyles} onClick={handleLogout}>
           <HiOutlineLogout size={"21px"} />
         </IconButton>
