@@ -27,6 +27,41 @@ import "./Login.css";
 import axios from "axios";
 import useLogin from "../../../../services/auth/hooks/useLogin";
 
+const formStyles: SxProps<Theme> = {
+  display: "grid",
+  top: "127px",
+  width: "75%",
+  height: "190px",
+  position: "relative",
+};
+
+const buttonStyles: SxProps<Theme> = {
+  height: "30px",
+  backgroundColor: "#073064",
+  color: "#ffffff",
+  borderRadius: "5px",
+  padding: "10px 15px",
+  fontFamily: "Zen Kurenaido",
+  marginTop: "0px",
+  fontSize: "12px",
+
+  "&:hover": {
+    backgroundColor: "#073064",
+  },
+};
+
+const typographyStyles: SxProps<Theme> = {
+  position: "absolute",
+  top: "85px",
+  display: "block",
+  height: "calc(55vh*0.087)",
+  fontStyle: "normal",
+  fontWeight: "400",
+  fontSize: "32px",
+  textAlign: "center",
+  fontFamily: "Zen Kurenaido",
+};
+
 function Login() {
     const [autoLogin, setAutoLogin] = useRecoilState(autoLoginState);
     const setLoginRender = useSetRecoilState(loginRenderState);
@@ -68,7 +103,7 @@ function Login() {
     return (
       <Box className='loginBox'>
       <Logo />
-      <Typography>Iniciar Sessão</Typography>
+      <Typography sx={typographyStyles}>Iniciar Sessão</Typography>
       <Formik
         initialValues={{
           email: "",
@@ -86,7 +121,7 @@ function Login() {
           handleBlur,
           handleSubmit,
         }) => (
-          <Form onSubmit={handleSubmit} autoComplete={"off"}>
+          <Form onSubmit={handleSubmit} sx={formStyles} autoComplete={"off"}>
             <TextField
               id='email'
               data-testid='email'
@@ -124,7 +159,7 @@ function Login() {
               sx={{ fontFamily: "Zen Kurenaido", fontSize: "12px" }}
               label='Lembre-se de mim'
             />
-            <Button type='submit' size='large' fullWidth>
+            <Button type='submit' size='large' fullWidth sx={buttonStyles}>
               Continuar
             </Button>
           </Form>
