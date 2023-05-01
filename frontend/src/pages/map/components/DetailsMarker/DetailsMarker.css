@@ -1,5 +1,5 @@
 .details_marker {
-    height: 600px;
+    height: fit-content;
     max-height: 600px;
     width: 340px;
     background-color: whitesmoke;
@@ -12,4 +12,66 @@
     bottom: 0;
     margin: auto;
     font-family: 'Zen Kurenaido';
+}
+
+.details_marker_content {
+    padding-bottom: 50px;
+}
+
+.details_marker_elements {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.details_marker h1 {
+    text-align: center;
+}
+
+.details_marker p {
+    font-size: 12px;
+    margin: 0;
+}
+
+.details_marker__description {
+    max-height: 100px;
+    overflow-y: scroll;
+}
+
+.details_marker_close {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.details_marker__date {
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.thumb {
+    width: 50px !important;
+}
+
+ul {
+    margin: 0 !important;
+}
+
+.control-arrow {
+    background-color: gray !important;
+}
+
+.thumbs-wrapper {
+    margin-top: 5px !important;
+    margin-bottom: 0 !important;
 }
