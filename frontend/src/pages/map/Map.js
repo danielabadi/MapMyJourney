@@ -7,8 +7,21 @@ import apiClient from "../../services/apiClient";
 import { IconBlue, IconGreen, IconYellow, IconGrey } from "../../utils/Markers";
 import { MdClose } from "react-icons/md";
 import { BiCloudUpload } from "react-icons/bi";
+import { showAddMarcadorState } from "../../states/actionbar/atom";
 
 function Map() {
+    const [formData, setFormData] = React.useState({
+        status: "ja fui",
+        title: "",
+        start_date: "",
+        end_date: "",
+        description: "",
+        lat: 0,
+        lng: 0,
+        photos: [],
+    });
+
+    const [showAddMarcador, setShowAddMarcador] = useRecoilState(showAddMarcadorState);
     const [markers, setMarkers] = useRecoilState(markersState);
     const mapRef = React.useRef(null);
     const layerRef = React.useRef(null);
@@ -61,125 +74,187 @@ function Map() {
 
     function getIcon(status) {
         return status === "ja fui"
-          ? IconBlue
-          : status === "quero ir"
-            ? IconGreen
-            : IconYellow;
+            ? IconBlue
+            : status === "quero ir"
+                ? IconGreen
+                : IconYellow;
+    }
+
+    function handleClick() {
+        setShowAddMarcador(false);
+        setFormData({
+            status: "ja fui",
+            title: "",
+            start_date: "",
+            end_date: "",
+            description: "",
+            lat: "",
+            lng: "",
+            photos: [],
+        });
+    }
+
+    function handleChange(event) {
+        setFormData((prevFormData) => {
+            return {
+                ...prevFormData,
+                [event.target.name]: event.target.value,
+            };
+        });
+    }
+
+    function handleFileChange(event) {
+        setFormData((prevFormData) => {
+          return {
+            ...prevFormData,
+            photos: [...event.target.files],
+          };
+        });
       }
 
     return (
         <div className='pageMap'>
             <div className='pageMap-map' id='pageMap-map'></div>
-            <div className='pageMap-form'>
-          <MdClose
-            size={"30px"}
-            color='#808080'
-            className='pageMap-form__close'
-          ></MdClose>
-          <h1>Adicionar marcador</h1>
-          <form autoComplete={"off"}>
-            <div className='pageMap-form__titulo'>
-              <label htmlFor='titulo'>Título*</label>
-              <input
-                id='titulo'
-                type='text'
-                name='title'
-                required
-              />
-            </div>
+            {showAddMarcador && (
+                <div className='pageMap-form'>
+                    <MdClose
+                        size={"30px"}
+                        color='#808080'
+                        className='pageMap-form__close'
+                        onClick={() => handleClick()}
+                    ></MdClose>
+                    <h1>Adicionar marcador</h1>
+                    <form autoComplete={"off"}>
+                        <div className='pageMap-form__titulo'>
+                            <label htmlFor='titulo'>Título*</label>
+                            <input
+                                id='titulo'
+                                type='text'
+                                onChange={handleChange}
+                                name='title'
+                                value={formData.title}
+                                required
+                            />
+                        </div>
 
-            <div className='pageMap-form__tipo'>
-              <label htmlFor='tipo'>Status*</label>
-              <div className='pageMap-form__tipo-buttons'>
-                <div className='pageMap-form__tipo__option'>
-                  <input
-                    type='radio'
-                    id='a25'
-                    name='status'
-                    value='ja fui'
-                  />
-                  <label className='btn btn-default' htmlFor='a25'>
-                    Já fui
-                  </label>
+                        <div className='pageMap-form__tipo'>
+                            <label htmlFor='tipo'>Status*</label>
+                            <div className='pageMap-form__tipo-buttons'>
+                                <div className='pageMap-form__tipo__option'>
+                                    <input
+                                        type='radio'
+                                        id='a25'
+                                        name='status'
+                                        value='ja fui'
+                                        onChange={handleChange}
+                                        checked={formData.status === "ja fui"}
+                                    />
+                                    <label className='btn btn-default' htmlFor='a25'>
+                                        Já fui
+                                    </label>
+                                </div>
+                                <div className='pageMap-form__tipo__option'>
+                                    <input
+                                        type='radio'
+                                        id='a50'
+                                        name='status'
+                                        value='planejado'
+                                        onChange={handleChange}
+                                        checked={formData.status === "planejado"}
+                                    />
+                                    <label className='btn btn-default' htmlFor='a50'>
+                                        Planejado
+                                    </label>
+                                </div>
+                                <div className='pageMap-form__tipo__option'>
+                                    <input
+                                        type='radio'
+                                        id='a75'
+                                        name='status'
+                                        value='quero ir'
+                                        onChange={handleChange}
+                                        checked={formData.status === "quero ir"}
+                                    />
+                                    <label className='btn btn-default' htmlFor='a75'>
+                                        Quero ir
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className='pageMap-form__datas'>
+                            <div>
+                                <label htmlFor='start_date'>Data de ida</label>
+                                <input
+                                    id='start_date'
+                                    className='pageMap-form__datas__picker'
+                                    type='date'
+                                    name='start_date'
+                                    onChange={handleChange}
+                                    value={formData.start_date}
+                                />
+                            </div>
+                            <div className='end_date'>
+                                <label htmlFor='end_date'>Data de volta</label>
+                                <input
+                                    id='end_date'
+                                    className='pageMap-form__datas__picker'
+                                    type='date'
+                                    name='end_date'
+                                    onChange={handleChange}
+                                    value={formData.end_date}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="pageMap-form__images">
+                            <div>
+                                <h6>Fotos</h6>
+                                <input
+                                    type='file'
+                                    id='input_image'
+                                    accept='image/png, image/jpeg'
+                                    onChange={handleFileChange}
+                                    multiple
+                                ></input>
+                                <label htmlFor="input_image">Adicionar fotos <BiCloudUpload className="upload-icon" size={'20px'}></BiCloudUpload></label>
+                            </div>
+                            {formData.photos.length === 0 && (
+                                <p>Nenhuma foto seleiconada</p>
+                            )}
+
+                            {formData.photos.length === 1 && (
+                                <p>{formData.photos.length} foto selecionada</p>
+                            )}
+
+                            {formData.photos.length > 1 && (
+                                <p>{formData.photos.length} fotos selecionadas</p>
+                            )}
+                        </div>
+
+                        <div className='pageMap-form__descricao'>
+                            <label htmlFor='descricao'>Descrição</label>
+                            <textarea
+                                id='descricao'
+                                value={formData.description}
+                                onChange={handleChange}
+                                name='description'
+                            />
+                        </div>
+
+                        <div className='pageMap-form__botoes'>
+                            <button
+                                type='button'
+                            >Definir localização
+                            </button>
+                            <button
+                            >
+                                Salvar
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div className='pageMap-form__tipo__option'>
-                  <input
-                    type='radio'
-                    id='a50'
-                    name='status'
-                    value='planejado'
-                  />
-                  <label className='btn btn-default' htmlFor='a50'>
-                    Planejado
-                  </label>
-                </div>
-                <div className='pageMap-form__tipo__option'>
-                  <input
-                    type='radio'
-                    id='a75'
-                    name='status'
-                    value='quero ir'
-                  />
-                  <label className='btn btn-default' htmlFor='a75'>
-                    Quero ir
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div className='pageMap-form__datas'>
-              <div>
-                <label htmlFor='start_date'>Data de ida</label>
-                <input
-                  id='start_date'
-                  className='pageMap-form__datas__picker'
-                  type='date'
-                  name='start_date'
-                />
-              </div>
-              <div className='end_date'>
-                <label htmlFor='end_date'>Data de volta</label>
-                <input
-                  id='end_date'
-                  className='pageMap-form__datas__picker'
-                  type='date'
-                  name='end_date'
-                />
-              </div>
-            </div>
-
-            <div className="pageMap-form__images">
-              <div>
-                <h6>Fotos</h6>
-                <input
-                  type='file'
-                  id='input_image'
-                  accept='image/png, image/jpeg'
-                ></input>
-                <label htmlFor="input_image">Adicionar fotos <BiCloudUpload className="upload-icon" size={'20px'}></BiCloudUpload></label>
-              </div>
-            </div>
-
-            <div className='pageMap-form__descricao'>
-              <label htmlFor='descricao'>Descrição</label>
-              <textarea
-                id='descricao'
-                name='description'
-              />
-            </div>
-
-            <div className='pageMap-form__botoes'>
-              <button
-                type='button'
-              >Definir localização
-              </button>
-              <button
-              >
-                Salvar
-              </button>
-            </div>
-          </form>
-        </div>
+            )}
         </div>
     )
 }

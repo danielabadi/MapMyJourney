@@ -14,6 +14,7 @@ import useLogout from "../../../../services/auth/hooks/useLogout";
 import { isLoggedInState } from "../../../../states/auth/atom";
 import { userResponseDto } from "../../../../types/users/userResponseDto";
 import Menu from "../Menu/Menu";
+import { showAddMarcadorState } from "../../../../states/actionbar/atom";
 
 const boxStyles: SxProps<Theme> = {
   height: "49px",
@@ -75,6 +76,7 @@ const logoutButtonStyles: SxProps<Theme> = {
 
 const ActionBar = () => {
   const navigate = useNavigate();
+  const setShowAddMarcador = useSetRecoilState(showAddMarcadorState);
   const setIsLoggedIn = useSetRecoilState(isLoggedInState);
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorElement);
@@ -86,7 +88,9 @@ const ActionBar = () => {
 
   const { mutate: logout } = useLogout();
 
-  const handleAddMarcador = () => {};
+  const handleAddMarcador = () => {
+    setShowAddMarcador(true);
+  };
 
   const handleLogout = () => {
     logout();

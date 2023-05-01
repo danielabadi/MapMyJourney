@@ -112,6 +112,12 @@
     margin-bottom: 3px;
 }
 
+.pageMap-form__images p {
+    font-size: 12px;
+    margin-top: 25px;
+    margin-left: 10px;
+}
+
 .end_date {
     margin-left: 12px;
 }
