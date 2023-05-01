@@ -2,3 +2,164 @@
     font-family: 'Zen Kurenaido';
     padding-bottom: 20px;
 }
+
+.edit-form h1 {
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+
+.edit-form>form {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    height: 370px; /*calc(53vh);*/
+    justify-content: space-evenly;
+}
+
+.edit-form__titulo {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-form__close {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.edit-form__titulo input {
+    border-radius: 5px;
+    padding: 8px 12px;
+    border: 1px solid black;
+}
+
+.edit-form__titulo,
+.edit-form__tipo,
+.edit-form__descricao {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-form__datas, .edit-form__botoes {
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-form__tipo-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-form__tipo__option label,
+.edit-form__tipo__option input {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+}
+
+.edit-form__tipo__option {
+    width: 85px;
+    height: 33px;
+    position: relative;
+    cursor: pointer;
+}
+
+.edit-form__tipo__option input[type="radio"]:checked+label {
+    background-color:#D3D3D3;
+}
+
+.edit-form__tipo__option label {
+    background-color: white;
+    margin-top: auto;
+    border: 1px solid black;
+    border-radius: 5px;
+    justify-content: center;
+    text-align: center;
+    line-height: 33px;
+}
+
+.edit-form__datas__picker {
+    padding: 8px 8px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+}
+
+.edit-form label,
+.edit-form button,
+.edit-form__images h6 {
+    font-size: 12px;
+}
+
+.edit-form__images {
+    display: flex;
+    height: 55px;
+}
+
+.edit-form__images h6 {
+    margin: 0;
+    font-weight: 400;
+    margin-bottom: 3px;
+}
+
+.edit-form__images p {
+    font-size: 12px;
+    margin-top: 25px;
+    margin-left: 10px;
+}
+
+.end_date {
+    margin-left: 12px;
+}
+
+.edit-form h1 {
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+
+.edit-form__descricao textarea {
+    border-radius: 5px;
+    padding: 8px 12px;
+    height: 87px;
+}
+
+.edit-form button {
+    padding: 8px 12px;
+    width: auto;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-family: 'Zen Kurenaido';
+}
+
+#input_image_edit {
+    display: none;
+}
+
+input#input_image_edit + label {
+    background-color: #D3D3D3;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #000000;
+    display: flex;
+    width: 129px;
+    height: 35px;
+    justify-content: space-between;
+}
