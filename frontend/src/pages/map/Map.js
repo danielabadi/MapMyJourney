@@ -1,16 +1,19 @@
 import React from "react";
 import "./Map.css";
 import * as Leaflet from "leaflet";
-import { useRecoilState } from "recoil";
-import { markersState } from "../../states/markers/atom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { markersState, showAddFailState, showAddSuccessState } from "../../states/markers/atom";
 import apiClient from "../../services/apiClient";
 import { IconBlue, IconGreen, IconYellow, IconGrey } from "../../utils/Markers";
 import { MdClose } from "react-icons/md";
 import { BiCloudUpload } from "react-icons/bi";
 import { showAddMarcadorState } from "../../states/actionbar/atom";
 import useCreateMarker from "../../services/map/hooks/useCreateMarker";
+import AlertAdd from "./components/Alert/AlertAdd";
 
 function Map() {
+    const setShowAddFail = useSetRecoilState(showAddFailState);
+    const setShowAddSuccess = useSetRecoilState(showAddSuccessState);
     const { mutate: createMarker } = useCreateMarker();
     const [formData, setFormData] = React.useState({
         status: "ja fui",
@@ -164,9 +167,11 @@ function Map() {
             });
             salvar.current = false;
             setShowAddMarcador(false);
+            setShowAddSuccess(true);
           },
           onError: (err) => {
             console.log(err);
+            setShowAddFail(true);
           },
         });
       };
@@ -324,6 +329,7 @@ function Map() {
                     </form>
                 </div>
             )}
+            <AlertAdd></AlertAdd>
         </div>
     )
 }
