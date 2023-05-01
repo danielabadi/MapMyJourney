@@ -25,6 +25,9 @@ function Map() {
     const [markers, setMarkers] = useRecoilState(markersState);
     const mapRef = React.useRef(null);
     const layerRef = React.useRef(null);
+    const salvar = React.useRef(false);
+    const marcador = React.useRef(false);
+    const layerRefAux = React.useRef(null);
     React.useEffect(() => {
         if (mapRef.current == null) {
             mapRef.current = Leaflet.map("pageMap-map", {
@@ -46,8 +49,27 @@ function Map() {
             }).addTo(mapRef.current);
 
             layerRef.current = Leaflet.layerGroup().addTo(mapRef.current);
+            layerRefAux.current = Leaflet.layerGroup().addTo(mapRef.current);
+
+            mapRef.current.on("click", (e) => {
+                if (marcador.current) {
+                    layerRefAux.current.clearLayers();
+                    Leaflet.Marker.prototype.options.icon = IconGrey;
+                    Leaflet.marker(e.latlng).addTo(layerRefAux.current);
+                    salvar.current = true;
+                    marcador.current = false;
+                    setShowAddMarcador(true);
+                    setFormData((prevFormData) => {
+                        return {
+                            ...prevFormData,
+                            lat: e.latlng.lat,
+                            lng: e.latlng.lng,
+                        };
+                    });
+                }
+            });
         }
-    });
+    }, []);
 
     React.useEffect(() => {
         async function fetchData() {
@@ -71,6 +93,11 @@ function Map() {
                 .addTo(layerRef.current)
         });
     }, [markers]);
+
+    function letPutPin() {
+        marcador.current = true;
+        setShowAddMarcador(false);
+    }
 
     function getIcon(status) {
         return status === "ja fui"
@@ -105,12 +132,12 @@ function Map() {
 
     function handleFileChange(event) {
         setFormData((prevFormData) => {
-          return {
-            ...prevFormData,
-            photos: [...event.target.files],
-          };
+            return {
+                ...prevFormData,
+                photos: [...event.target.files],
+            };
         });
-      }
+    }
 
     return (
         <div className='pageMap'>
@@ -245,9 +272,19 @@ function Map() {
                         <div className='pageMap-form__botoes'>
                             <button
                                 type='button'
-                            >Definir localização
+                                onClick={letPutPin}
+                                style={{
+                                    backgroundColor: salvar.current ? "#A73636" : "#073064",
+                                }}
+                            > {!salvar.current
+                                ? "Definir localização"
+                                : "Alterar localização"}
                             </button>
                             <button
+                                disabled={!salvar.current}
+                                style={{
+                                    backgroundColor: salvar.current ? "#49B047" : "#D3D3D3",
+                                }}
                             >
                                 Salvar
                             </button>

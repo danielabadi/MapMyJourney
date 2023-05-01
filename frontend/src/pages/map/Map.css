@@ -167,3 +167,7 @@ input#input_image + label {
 .upload-icon {
     margin-left: 5px;
 }
+
+.pageMap-form__botoes {
+    margin-top: auto;
+}
