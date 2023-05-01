@@ -1,9 +1,12 @@
 import React from "react";
 import "./Map.css";
 import * as Leaflet from "leaflet";
+import { useRecoilState } from "recoil";
+import { markersState } from "../../states/markers/atom";
+import apiClient from "../../services/apiClient";
 
 function Map() {
-
+    const [markers, setMarkers] = useRecoilState(markersState);
     const mapRef = React.useRef(null);
     React.useEffect(() => {
         if (mapRef.current == null) {
@@ -26,6 +29,20 @@ function Map() {
           }).addTo(mapRef.current);
         }
     });
+
+    React.useEffect(() => {
+        async function fetchData() {
+          try {
+            const response = await apiClient.get("/markers", {
+              withCredentials: true,
+            });
+            setMarkers([...response.data.data]);
+          } catch (error) {
+            console.log("error", error);
+          }
+        }
+        fetchData();
+      }, []);
 
     return (
         <div className='pageMap'>
