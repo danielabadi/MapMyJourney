@@ -10,9 +10,13 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { showEditMarkerState } from "../../../../states/editmarker/atom";
 import { MdModeEdit } from "react-icons/md";
 import EditMarker from "../EditMarker/EditMarker";
+import AlertEdit from "../Alert/AlertEdit";
+import { showEditFailState, showEditSuccessState } from "../../../../states/editmarker/atom";
 
 function DetailsMarker(props) {
     const setShowDetailsMarker = useSetRecoilState(showDetailsMarkerState);
+    const setShowEditFail = useSetRecoilState(showEditFailState);
+    const setShowEditSuccess = useSetRecoilState(showEditSuccessState);
     const [showEditMarker, setShowEditMarker] = useRecoilState(showEditMarkerState);
     const markers = useRecoilValue(markersState);
     const indexMarker = markers.findIndex(m => m.id === props.marker);
@@ -29,6 +33,8 @@ function DetailsMarker(props) {
 
     function handleClick() {
         setShowDetailsMarker(false);
+        setShowEditFail(false);
+        setShowEditSuccess(false);
     }
 
     function handleEdit() {
@@ -38,7 +44,7 @@ function DetailsMarker(props) {
     return (
         <div className="details_marker">
             {
-                !showEditMarker ?
+                !showEditMarker && marker !== undefined ?
                     <div className="details_marker_content">
                         <MdClose size={'30px'} color="#808080" className="details_marker_close" onClick={() => handleClick()}></MdClose>
                         <div className="details_marker_elements">
@@ -65,6 +71,7 @@ function DetailsMarker(props) {
                     :
                     marker !== undefined && <EditMarker marker={marker}></EditMarker>
             }
+            <AlertEdit></AlertEdit>
         </div>
     )
 }

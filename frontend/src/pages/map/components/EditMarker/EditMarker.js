@@ -7,11 +7,14 @@ import { markersState } from "../../../../states/markers/atom";
 import { MdClose } from "react-icons/md";
 import { BiCloudUpload } from "react-icons/bi";
 import moment from "moment";
+import { showEditFailState, showEditSuccessState } from "../../../../states/editmarker/atom";
 
 function EditMarker(props) {
     const setMarkers = useSetRecoilState(markersState);
     const setShowEditMarker = useSetRecoilState(showEditMarkerState);
     const { mutate: editMarker } = useEditMarker();
+    const setShowEditFail = useSetRecoilState(showEditFailState);
+    const setShowEditSuccess = useSetRecoilState(showEditSuccessState);
     const [formData, setFormData] = React.useState({
         markerId: props.marker.id,
         status: props.marker.status,
@@ -23,6 +26,7 @@ function EditMarker(props) {
         lng: props.marker.lng,
         photos: [],
     });
+
     function handleChange(event) {
         setFormData((prevFormData) => {
             return {
@@ -52,10 +56,12 @@ function EditMarker(props) {
                     return [...prevMod];
                 });
                 setShowEditMarker(false);
+                setShowEditSuccess(true);
             },
             onError: (err) => {
                 console.log(err);
                 setShowEditMarker(false);
+                setShowEditFail(true);
             },
         });
     };
