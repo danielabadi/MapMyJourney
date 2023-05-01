@@ -8,8 +8,10 @@ import { IconBlue, IconGreen, IconYellow, IconGrey } from "../../utils/Markers";
 import { MdClose } from "react-icons/md";
 import { BiCloudUpload } from "react-icons/bi";
 import { showAddMarcadorState } from "../../states/actionbar/atom";
+import useCreateMarker from "../../services/map/hooks/useCreateMarker";
 
 function Map() {
+    const { mutate: createMarker } = useCreateMarker();
     const [formData, setFormData] = React.useState({
         status: "ja fui",
         title: "",
@@ -139,6 +141,36 @@ function Map() {
         });
     }
 
+    const handleSubmit = async (event) => {
+        marcador.current = false;
+        event.preventDefault();
+    
+        createMarker(formData, {
+          onSuccess: (data) => {
+            setMarkers((prev) => {
+              return [...prev, data.data];
+            });
+    
+            layerRefAux.current.clearLayers();
+            setFormData({
+              status: "ja fui",
+              title: "",
+              start_date: "",
+              end_date: "",
+              description: "",
+              lat: "",
+              lng: "",
+              photos: [],
+            });
+            salvar.current = false;
+            setShowAddMarcador(false);
+          },
+          onError: (err) => {
+            console.log(err);
+          },
+        });
+      };
+
     return (
         <div className='pageMap'>
             <div className='pageMap-map' id='pageMap-map'></div>
@@ -151,7 +183,7 @@ function Map() {
                         onClick={() => handleClick()}
                     ></MdClose>
                     <h1>Adicionar marcador</h1>
-                    <form autoComplete={"off"}>
+                    <form onSubmit={handleSubmit} autoComplete={"off"}>
                         <div className='pageMap-form__titulo'>
                             <label htmlFor='titulo'>Título*</label>
                             <input
