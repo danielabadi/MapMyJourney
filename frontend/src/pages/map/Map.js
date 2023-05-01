@@ -10,8 +10,11 @@ import { BiCloudUpload } from "react-icons/bi";
 import { showAddMarcadorState } from "../../states/actionbar/atom";
 import useCreateMarker from "../../services/map/hooks/useCreateMarker";
 import AlertAdd from "./components/Alert/AlertAdd";
+import { showDetailsMarkerState } from "../../states/detailsmarker/atom";
+import DetailsMarker from "./components/DetailsMarker/DetailsMarker";
 
 function Map() {
+    let detalhesMarcador = React.useRef(null);
     const setShowAddFail = useSetRecoilState(showAddFailState);
     const setShowAddSuccess = useSetRecoilState(showAddSuccessState);
     const { mutate: createMarker } = useCreateMarker();
@@ -27,6 +30,7 @@ function Map() {
     });
 
     const [showAddMarcador, setShowAddMarcador] = useRecoilState(showAddMarcadorState);
+    const [showDetailsMarker, setShowDetailsMarker] = useRecoilState(showDetailsMarkerState);
     const [markers, setMarkers] = useRecoilState(markersState);
     const mapRef = React.useRef(null);
     const layerRef = React.useRef(null);
@@ -96,6 +100,10 @@ function Map() {
             Leaflet.Marker.prototype.options.icon = getIcon(element.status);
             Leaflet.marker([element.lat, element.lng])
                 .addTo(layerRef.current)
+                .on("click", () => {
+                    setShowDetailsMarker(true);
+                    detalhesMarcador.current = element.id;
+                });
         });
     }, [markers]);
 
@@ -147,34 +155,34 @@ function Map() {
     const handleSubmit = async (event) => {
         marcador.current = false;
         event.preventDefault();
-    
+
         createMarker(formData, {
-          onSuccess: (data) => {
-            setMarkers((prev) => {
-              return [...prev, data.data];
-            });
-    
-            layerRefAux.current.clearLayers();
-            setFormData({
-              status: "ja fui",
-              title: "",
-              start_date: "",
-              end_date: "",
-              description: "",
-              lat: "",
-              lng: "",
-              photos: [],
-            });
-            salvar.current = false;
-            setShowAddMarcador(false);
-            setShowAddSuccess(true);
-          },
-          onError: (err) => {
-            console.log(err);
-            setShowAddFail(true);
-          },
+            onSuccess: (data) => {
+                setMarkers((prev) => {
+                    return [...prev, data.data];
+                });
+
+                layerRefAux.current.clearLayers();
+                setFormData({
+                    status: "ja fui",
+                    title: "",
+                    start_date: "",
+                    end_date: "",
+                    description: "",
+                    lat: "",
+                    lng: "",
+                    photos: [],
+                });
+                salvar.current = false;
+                setShowAddMarcador(false);
+                setShowAddSuccess(true);
+            },
+            onError: (err) => {
+                console.log(err);
+                setShowAddFail(true);
+            },
         });
-      };
+    };
 
     return (
         <div className='pageMap'>
@@ -328,6 +336,9 @@ function Map() {
                         </div>
                     </form>
                 </div>
+            )}
+            {showDetailsMarker && (
+                <DetailsMarker marker={detalhesMarcador.current}></DetailsMarker>
             )}
             <AlertAdd></AlertAdd>
         </div>
