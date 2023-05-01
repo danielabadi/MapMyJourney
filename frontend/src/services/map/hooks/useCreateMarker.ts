@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import MapService from "../MapSerive";
+import MapService from "../MapService";
 
 const useCreateMarker = () => {
   return useMutation(MapService.createMarker);
