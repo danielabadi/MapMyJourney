@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { validationResult } from 'express-validator';
 import { ErrorHandler } from '../../errors/ErrorHandler';
 import { UserId } from '../../users/user-profile/UserId';
 import { Marker } from '../marker/Marker';
@@ -24,11 +23,6 @@ export class RegisterMarkerController implements IRegisterMarkerController {
     }
 
     public async registerMarker(req: Request, res: Response): Promise<Response> {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ success: false, errors: errors.array() });
-        }
-
         try {
             const filenames = (req.files as Express.Multer.File[]).map((file: Express.Multer.File) => file.filename);
             const registerMarkerRequest: RegisterMarkerRequest = req.body;
