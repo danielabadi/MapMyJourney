@@ -122,6 +122,9 @@ function Map() {
 
     function handleClick() {
         setShowAddMarcador(false);
+        layerRefAux.current.clearLayers();
+        marcador.current = false;
+        salvar.current = false;
         setFormData({
             status: "ja fui",
             title: "",

@@ -146,6 +146,7 @@
     color: white;
     cursor: pointer;
     font-family: 'Zen Kurenaido';
+    margin-top: auto;
 }
 
 #input_image_edit {

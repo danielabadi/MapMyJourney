@@ -35,7 +35,7 @@
 
 .details_marker__description {
     max-height: 100px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .details_marker_close {
