@@ -88,7 +88,12 @@ const MarkersList: React.FC = () => {
   const handleClose = (
     event: {},
     reason: "backdropClick" | "escapeKeyDown" | undefined
-  ) => { };
+  ) => {
+    if (reason === "backdropClick" || reason === "escapeKeyDown") return;
+
+    setShowFilter(false);
+    setShowMarkersList(false);
+  };
 
   const handleClickItem = (element: any) => { };
 
@@ -104,7 +109,9 @@ const MarkersList: React.FC = () => {
           <Box display='flex' flexDirection='row'>
             <Box display='flex'>
               <IconButton
-                onClick={() => { }}
+                onClick={() => {
+                  setShowFilter(true);
+                }}
                 sx={{ paddingTop: "15px", color: "#808080", paddingX: "13px" }}
               >
                 <HiFilter size={"20px"} />
