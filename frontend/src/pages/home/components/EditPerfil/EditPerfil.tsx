@@ -21,6 +21,68 @@ import { userResponseDto } from "../../../../types/users/userResponseDto";
 import { UserPerfilRequestDto } from "../../../../types/users/UserPerfilRequestDto";
 import IUserPerfilForm, { userPerfilFormSchema } from "../../../../validations/users/UserPerfil.schema";
 
+const dialogStyles: SxProps<Theme> = {
+  "& .MuiDialog-paper": {
+    width: "500px",
+    height: "585px",
+    borderRadius: "12px",
+    color: "#000000",
+    position: "absolute",
+    top: "60px",
+    right: "auto",
+    margin: "0",
+  },
+
+  "& .MuiDialogTitle-root": {
+    height: "72px",
+    padding: "0",
+  },
+
+  "& .MuiDialogContent-root": {
+    padding: "0",
+    height: "458px",
+    display: "inline-block",
+  },
+
+  "& .MuiDialogActions-root": {
+    height: "55px",
+    padding: "0",
+  },
+
+  "& .MuiFormControl-root": {
+    width: "400px",
+  },
+};
+
+const typographyStyles: SxProps<Theme> = {
+  fontStyle: "normal",
+  fontWeight: "400",
+  fontSize: "40px",
+  lineHeight: "40px",
+  fontFamily: "Zen Kurenaido",
+  color: "#000000",
+  textShadow: "1px solid #000000",
+  textAlign: "center",
+  paddingY: "16px",
+  marginLeft: "80px",
+};
+
+const buttonStyles: SxProps<Theme> = {
+  height: "30px",
+  backgroundColor: "#073064",
+  color: "#ffffff",
+  borderRadius: "5px",
+  fontFamily: "Zen Kurenaido",
+  marginTop: "0px",
+  fontSize: "16px",
+  lineHeight: "20px",
+  width: "400px",
+
+  "&:hover": {
+    backgroundColor: "#073064",
+  },
+};
+
 const EditPerfil: React.FC = () => {
   const [showEditPerfil, setShowEditPerfil] =
     useRecoilState(showEditPerfilState);
@@ -89,13 +151,14 @@ const EditPerfil: React.FC = () => {
     >
       {({ submitForm }) => (
         <Dialog
+          sx={dialogStyles}
           open={showEditPerfil}
           onClose={handleClose}
           hideBackdrop={true}
         >
           <DialogTitle>
             <Box display='flex' flexDirection='row'>
-              <Box flexGrow={1}>
+              <Box flexGrow={1} sx={typographyStyles}>
                 Editar Perfil
               </Box>
               <Box display='flex'>
@@ -118,7 +181,7 @@ const EditPerfil: React.FC = () => {
             <EditPerfilForm />
           </DialogContent>
           <DialogActions sx={{ justifyContent: "center" }}>
-            <Button onClick={() => submitForm()}>
+            <Button sx={buttonStyles} onClick={() => submitForm()}>
               Editar
             </Button>
           </DialogActions>
