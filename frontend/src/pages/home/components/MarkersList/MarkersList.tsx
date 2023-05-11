@@ -16,6 +16,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { filterState, showFilterState, showMarkersListState } from "../../../../states/actionbar/atom";
 import { markersState } from "../../../../states/markers/atom";
 import moment from "moment";
+import { zoomState } from "../../../../states/zoom/atom";
 
 const dialogStyles: SxProps<Theme> = {
   "& .MuiDialog-paper": {
@@ -84,6 +85,7 @@ const MarkersList: React.FC = () => {
     useRecoilState(showMarkersListState);
   const setShowFilter = useSetRecoilState(showFilterState);
   const filterValues = useRecoilValue(filterState);
+  const setZoom = useSetRecoilState(zoomState);
 
   const handleClose = (
     event: {},
@@ -95,7 +97,9 @@ const MarkersList: React.FC = () => {
     setShowMarkersList(false);
   };
 
-  const handleClickItem = (element: any) => { };
+  const handleClickItem = (element: any) => { 
+    setZoom({ center: [element.lat, element.lng], zoom: 9 });
+  };
 
   return (
     <>
@@ -164,11 +168,7 @@ const MarkersList: React.FC = () => {
                   <ListItemText
                     primary={element.title}
                     secondary={
-                      element.start_date
-                        ? `${moment(element.start_date).format(
-                          "DD/MM/YYYY"
-                        )} - ${moment(element.end_date).format("DD/MM/YYYY")}`
-                        : ""
+                      `${element.start_date !== null ? moment(element.start_date).utc().format('DD/MM/YYYY') : 'Sem data de ida'} - ${element.end_date !== null ? moment(element.end_date).utc().format('DD/MM/YYYY') : 'Sem data de volta'}`
                     }
                   />
                 </ListItemButton>

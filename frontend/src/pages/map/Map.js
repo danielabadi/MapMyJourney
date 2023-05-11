@@ -12,6 +12,7 @@ import useCreateMarker from "../../services/map/hooks/useCreateMarker";
 import AlertAdd from "./components/Alert/AlertAdd";
 import { showDetailsMarkerState } from "../../states/detailsmarker/atom";
 import DetailsMarker from "./components/DetailsMarker/DetailsMarker";
+import { zoomState } from "../../states/zoom/atom";
 
 function Map() {
     let detalhesMarcador = React.useRef(null);
@@ -32,6 +33,7 @@ function Map() {
     const [showAddMarcador, setShowAddMarcador] = useRecoilState(showAddMarcadorState);
     const [showDetailsMarker, setShowDetailsMarker] = useRecoilState(showDetailsMarkerState);
     const [markers, setMarkers] = useRecoilState(markersState);
+    const [zoom, setZoom] = useRecoilState(zoomState);
     const mapRef = React.useRef(null);
     const layerRef = React.useRef(null);
     const salvar = React.useRef(false);
@@ -79,6 +81,12 @@ function Map() {
             });
         }
     }, []);
+
+    React.useEffect(() => {
+        if (mapRef.current != null) {
+          mapRef.current.flyTo(zoom.center, zoom.zoom)
+        }
+      }, [zoom]);
 
     React.useEffect(() => {
         async function fetchData() {
