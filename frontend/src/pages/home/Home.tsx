@@ -5,6 +5,7 @@ import useGetUserData from "../../services/users/hooks/useGetUserData";
 import ActionBar from "./components/ActionBar/ActionBar";
 import Map from "../map/Map";
 import EditPerfil from "./components/EditPerfil/EditPerfil";
+import MarkersList from "./components/MarkersList/MarkersList";
 
 const Home = () => {
   const isLoggedIn = useRecoilValue(isLoggedInState);
@@ -20,6 +21,7 @@ const Home = () => {
     <>
       <ActionBar />
       <EditPerfil />
+      <MarkersList />
       <Map />
     </>
   );

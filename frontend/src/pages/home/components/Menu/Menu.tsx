@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import { HiLocationMarker, HiPencilAlt } from "react-icons/hi";
 import { useSetRecoilState } from "recoil";
-import { showEditPerfilState } from "../../../../states/actionbar/atom";
+import { showEditPerfilState, showMarkersListState } from "../../../../states/actionbar/atom";
 
 const typographyStyles: SxProps<Theme> = {
   positon: "relative",
@@ -51,6 +51,7 @@ export interface MenuProps {
 
 const Menu: React.FC<MenuProps> = ({ anchorElement, open, onClose }) => {
   const setShowEditPerfil = useSetRecoilState(showEditPerfilState);
+  const setShowMarkersList = useSetRecoilState(showMarkersListState);
 
   const handleEditarPerfil = () => {
     setShowEditPerfil(true);
@@ -58,6 +59,7 @@ const Menu: React.FC<MenuProps> = ({ anchorElement, open, onClose }) => {
   };
 
   const handleList = () => {
+    setShowMarkersList(true);
     onClose();
   };
 
