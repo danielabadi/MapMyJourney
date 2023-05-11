@@ -17,6 +17,67 @@ import { filterState, showFilterState, showMarkersListState } from "../../../../
 import { markersState } from "../../../../states/markers/atom";
 import moment from "moment";
 
+const dialogStyles: SxProps<Theme> = {
+  "& .MuiDialog-paper": {
+    width: "400px",
+    minHeight: "200px",
+    maxHeight: "500px",
+    borderRadius: "10px",
+    color: "#000000",
+    position: "absolute",
+    top: "60px",
+    right: "14px",
+    margin: "0",
+  },
+
+  "& .MuiDialogTitle-root": {
+    height: "50px",
+    borderBottom: "1px solid #000000",
+    padding: "0",
+  },
+
+  "& .MuiDialogContent-root": {
+    padding: "0",
+  },
+
+  "& .MuiList-root": {
+    padding: "0",
+  },
+
+  "& .MuiListItemButton-root": {
+    padding: "0",
+  },
+
+  "& .MuiListItemText-primary": {
+    fontFamily: "Inter",
+    fontStyle: "normal",
+    fontWeight: "400",
+    fontSize: "18px",
+    lineHeight: "20px",
+  },
+
+  "& .MuiListItemText-secundary": {
+    fontFamily: "Inter",
+    fontStyle: "normal",
+    fontWeight: "400",
+    fontSize: "14px",
+    lineHeight: "20px",
+    color: "rgba(0, 0, 0, 0.7)",
+  },
+};
+
+const typographyStyles: SxProps<Theme> = {
+  fontStyle: "normal",
+  fontWeight: "400",
+  fontSize: "25px",
+  lineHeight: "30px",
+  fontFamily: "Inter",
+  color: "#000000",
+  textShadow: "1px solid #000000",
+  textAlign: "center",
+  paddingY: "10px",
+};
+
 const MarkersList: React.FC = () => {
   const markersValues: any[] = useRecoilValue(markersState);
   const [showMarkersList, setShowMarkersList] =
@@ -34,6 +95,7 @@ const MarkersList: React.FC = () => {
   return (
     <>
       <Dialog
+        sx={dialogStyles}
         open={showMarkersList}
         onClose={handleClose}
         hideBackdrop={true}
@@ -48,7 +110,7 @@ const MarkersList: React.FC = () => {
                 <HiFilter size={"20px"} />
               </IconButton>
             </Box>
-            <Box flexGrow={1}>
+            <Box flexGrow={1} sx={typographyStyles}>
               Meus marcadores
             </Box>
             <Box display='flex'>
