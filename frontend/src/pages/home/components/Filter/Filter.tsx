@@ -77,9 +77,22 @@ const Filter: React.FC = () => {
   const handleClose = (
     event: {},
     reason: "backdropClick" | "escapeKeyDown" | undefined
-  ) => { };
+  ) => {
+    if (reason === "backdropClick" || reason === "escapeKeyDown") return;
 
-  const handleApply = () => { }
+    setShowFilter(false);
+  };
+
+  const handleApply = () => {
+    let newFilter: string[] = [];
+
+    if (addStatus1) newFilter.push('ja fui');
+    if (addStatus2) newFilter.push('quero ir');
+    if (addStatus3) newFilter.push('planejado');
+
+    setFilterValues(newFilter);
+    handleClose({}, undefined);
+  }
 
   return (
     <Dialog
