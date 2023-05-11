@@ -4,6 +4,69 @@ import { HiX } from "react-icons/hi";
 import { useRecoilState } from "recoil";
 import { filterState, showFilterState } from "../../../../states/actionbar/atom";
 
+const dialogStyles: SxProps<Theme> = {
+  "& .MuiDialog-paper": {
+    width: "200px",
+    height: "230px",
+    borderRadius: "10px",
+    color: "#000000",
+    position: "absolute",
+    top: "60px",
+    right: "425px",
+    margin: "0",
+  },
+
+  "& .MuiDialogTitle-root": {
+    height: "50px",
+    borderBottom: "1px solid #000000",
+    padding: "0",
+  },
+
+  "& .MuiDialogContent-root": {
+    padding: "0",
+    height: '130px',
+    borderBottom: "1px solid #000000",
+  },
+
+  "& .MuiDialogActions-root": {
+    height: "50px",
+    padding: "0",
+  }
+};
+
+const buttonStyles: SxProps<Theme> = {
+  height: "30px",
+  backgroundColor: "#073064",
+  color: "#ffffff",
+  borderRadius: "5px",
+  fontFamily: "Zen Kurenaido",
+  marginTop: "0px",
+  fontSize: "16px",
+  lineHeight: "20px",
+  width: "100px",
+  marginX: 'auto',
+
+  "&:hover": {
+    backgroundColor: "#073064",
+  },
+};
+
+const typographyStyles: SxProps<Theme> = {
+  fontStyle: "normal",
+  fontWeight: "400",
+  fontSize: "25px",
+  lineHeight: "30px",
+  fontFamily: "Inter",
+  color: "#000000",
+  textShadow: "1px solid #000000",
+  textAlign: "center",
+  paddingY: "10px",
+};
+
+const checkboxStyles: SxProps<Theme> = {
+  marginLeft: '10px',
+}
+
 const Filter: React.FC = () => {
   const [showFilter, setShowFilter] = useRecoilState(showFilterState);
   const [filterValues, setFilterValues] = useRecoilState(filterState);
@@ -20,6 +83,7 @@ const Filter: React.FC = () => {
 
   return (
     <Dialog
+      sx={dialogStyles}
       open={showFilter}
       onClose={handleClose}
       hideBackdrop={true}
@@ -27,7 +91,7 @@ const Filter: React.FC = () => {
       <DialogTitle>
         <Box display='flex' flexDirection='row'>
           <Box sx={{ width: '50px' }}></Box>
-          <Box flexGrow={1} >
+          <Box flexGrow={1} sx={typographyStyles}>
             Filtro
           </Box>
           <Box display='flex'>
@@ -44,19 +108,19 @@ const Filter: React.FC = () => {
       </DialogTitle>
       <DialogContent>
         <FormGroup>
-          <FormControlLabel control={
+          <FormControlLabel sx={checkboxStyles} control={
             <Checkbox
               onChange={() => setAddStatus1(!addStatus1)}
               defaultChecked={addStatus1}
             />
           } label="Já fui" />
-          <FormControlLabel control={
+          <FormControlLabel sx={checkboxStyles} control={
             <Checkbox
               onChange={() => setAddStatus2(!addStatus2)}
               defaultChecked={addStatus2}
             />
           } label="Quero ir" />
-          <FormControlLabel control={
+          <FormControlLabel sx={checkboxStyles} control={
             <Checkbox
               onChange={() => setAddStatus3(!addStatus3)}
               defaultChecked={addStatus3}
@@ -65,7 +129,7 @@ const Filter: React.FC = () => {
         </FormGroup>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleApply}> Aplicar </Button>
+        <Button sx={buttonStyles} onClick={handleApply}> Aplicar </Button>
       </DialogActions>
     </Dialog>
   );
