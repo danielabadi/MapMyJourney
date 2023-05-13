@@ -1,5 +1,21 @@
 import { UserDescription } from '../../../../src/users/user-profile/UserDescription';
 
+describe('When creating a null user description', () => {
+    it('should successfully return an user description instance', async () => {
+        const description = null;
+        expect(() => UserDescription.create(description)).not.toThrow();
+        expect(UserDescription.create(description).description).toEqual(description);
+    });
+});
+
+describe('When creating an empty user description', () => {
+    it('should successfully return an user description instance', async () => {
+        const description = '';
+        expect(() => UserDescription.create(description)).not.toThrow();
+        expect(UserDescription.create(description).description).toEqual(description);
+    });
+});
+
 describe('When creating an user description with less than 500 characters', () => {
     it('should successfully return an user description instance', async () => {
         const description = 'teste';

@@ -12,7 +12,9 @@
     "run-migrations": "npx knex migrate:latest --knexfile ./DbConfig.ts",
     "test:unit": "jest ./tests/unit/",
     "test:integration": "jest ./tests/integration/",
-    "test:e2e": "jest ./tests/e2e/"
+    "test:unit:coverage": "jest ./tests/unit/ --coverage --collectCoverageFrom=\"./src/**\"",
+    "test:integration:coverage": "jest ./tests/integration/ --coverage --collectCoverageFrom=\"./src/**\"",
+    "test:all:coverage": "jest ./tests/integration/ ./tests/unit/ --coverage --collectCoverageFrom=\"./src/**\""
   },
   "repository": {
     "type": "git",
