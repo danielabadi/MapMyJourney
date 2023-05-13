@@ -26,6 +26,7 @@ import ILoginForm, {
 import "./Login.css";
 import axios from "axios";
 import useLogin from "../../../../services/auth/hooks/useLogin";
+import { zoomState } from "../../../../states/zoom/atom";
 
 const formStyles: SxProps<Theme> = {
   display: "grid",
@@ -67,6 +68,7 @@ function Login() {
     const setLoginRender = useSetRecoilState(loginRenderState);
     const setIsLoggedIn = useSetRecoilState(isLoggedInState);
     const navigate = useNavigate();
+    const setZoom = useSetRecoilState(zoomState);
 
     const { mutate: login } = useLogin();
   
@@ -83,6 +85,7 @@ function Login() {
       login(validatedValues, {
         onSuccess: (data: any) => {
           setIsLoggedIn(true);
+          setZoom({center: [0,0], zoom: 3});
           navigate("/home");
         },
         onError: (err) => {
