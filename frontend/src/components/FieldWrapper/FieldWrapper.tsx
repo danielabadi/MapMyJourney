@@ -1,12 +1,13 @@
 import {
   FormControl,
+  FormHelperText,
   InputLabel,
   SxProps,
   Theme,
 } from "@mui/material";
 
 const formControlStyles: SxProps<Theme> = {
-  height: "51px",
+  height: "50px",
 
   "& label": {
     fontSize: "0.75rem",
@@ -20,6 +21,11 @@ const formControlStyles: SxProps<Theme> = {
       color: "#000000",
     },
     transform: "none",
+  },
+  '& .MuiFormHelperText-root': {
+    fontSize: '9px',
+    fontWeight: 500,
+    color: "#FF0000",
   },
   "& .MuiInputLabel-asterisk": {
     color: "#FF0000",
@@ -53,12 +59,18 @@ const FieldWrapper: React.FC<FieldWrapperProps> = ({
       error={error}
       required={required}
       disabled={disabled}
-      sx={multiline ? {... formControlStyles, height: '103px'} : formControlStyles}
+      sx={multiline ? { ...formControlStyles, height: '103px', marginBottom: '2px', }
+        : { ...formControlStyles, marginBottom: disabled ? '6px' : '16px', }}
     >
       <InputLabel shrink htmlFor={htmlFor}>
         {label}
       </InputLabel>
       {children}
+      {!multiline && !disabled && (
+        <FormHelperText>
+          {helperText && error ? helperText : ' '}
+        </FormHelperText>
+      )}
     </FormControl>
   );
 };
