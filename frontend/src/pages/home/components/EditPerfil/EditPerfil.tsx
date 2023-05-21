@@ -24,7 +24,7 @@ import IUserPerfilForm, { userPerfilFormSchema } from "../../../../validations/u
 const dialogStyles: SxProps<Theme> = {
   "& .MuiDialog-paper": {
     width: "500px",
-    height: "585px",
+    height: "625px",
     borderRadius: "12px",
     color: "#000000",
     position: "absolute",
