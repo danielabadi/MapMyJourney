@@ -100,7 +100,176 @@ História 3: Como usuário do sistema MapMyJourney, gostaria de ter a capacidade
 
 </details>
 
+<details>
+  <summary>
+    <h1>Arquitetura hexagonal</h1>
+  </summary>
+
+A arquitetura hexagonal tem como objetivo principal isolar a lógica de negócio do sistema das tecnologias e frameworks utilizados, tornando o código mais flexível e fácil de manter. O backend do sistema MapMyJourney utiliza a arquitetura hexagonal para garantir uma separação clara e coerente entre o domínio e o resto do sistema - interface com o usuário, persistência de dados, entre outros. 
+
+A implementação dessa arquitetura permitiu:
+* que os desenvolvedores se concentrassem no domínio de diário de viagens interativo, que é a parte responsável por gerar valor do sistema e representa o propósito do sistema;
+* maior testabilidade; 
+* uma troca mais fácil de bibliotecas, frameworks, banco de dados, entre outros.
+
+A interface com o backend do sistema se dá especificamente a partir de requisições HTTP. As rotas do sistema são implementadas pela classe “AppRouter”, que é responsável por delegar as requisições para as respectivas rotas. Para melhor separação, “UsersRouter” e “MarkersRouter” implementam as rotas disponíveis para as responsabilidades relacionadas a usuários e marcadores. Essas são classes de infraestrutura que utilizam do framework Express, não fazendo parte do domínio.
+
+A partir das rotas, são definidos os adaptadores que são responsáveis por interagir com as portas de entrada definidas pela arquitetura hexagonal. “UsersRouter” agrega os adaptadores para lidar com usuários: “RegisterUserController”, “EditUserController”, “GetUserController”, “LoginController” e “LogoutController”. Já “MarkersRouters” agrega os adaptadores para lidar com marcadores: “RegisterMarkerController”, “EditMarkerController” e “GetMarkerController”. Esses adaptadores lidam com as requisições recebidas pelas rotas, invocam as portas de entrada do domínio necessárias e lidam com a resposta da requisição.
+
+
+Entre as portas de entrada do sistema estão:
+* IRegisterUserCommandHandler - responsável por definir como os adaptadores devem se comunicar com o domínio para o registro de usuários no sistema.
+* IEditUserCommandHandler - responsável por definir como os adaptadores devem se comunicar com o domínio para a edição de usuários no sistema.
+* IGetUserCommandHandler - responsável por definir como os adaptadores devem se comunicar com o domínio para a obtenção de usuários no sistema.
+* IUserSessionService - responsável por definir como os adaptadores devem se comunicar com o domínio para lidar com sessões de usuários (funcionalidades de login, logout) no sistema.
+* IRegisterMarkerCommandHandler - responsável por definir como os adaptadores devem se comunicar com o domínio para o registro de marcadores no sistema.
+* IEditMarkerCommandHandler - responsável por definir como os adaptadores devem se comunicar com o domínio para a edição de marcadores no sistema.
+* IGetMarkerCommandHandler - responsável por definir como os adaptadores devem se comunicar com o domínio para a obtenção de marcadores no sistema.
+
+No domínio podemos encontrar:
+* RegisterUserCommandHandler - responsável por lidar com o serviço de registro de usuários no sistema.
+* EditUserCommandHandler - responsável por lidar com o serviço de edição de usuários no sistema.
+* GetUserCommandHandler - responsável por lidar com o serviço de obtenção de usuários no sistema.
+* UserSessionAuthenticationService - responsável por lidar com sessões de usuários (funcionalidades de login, logout) no sistema.
+* RegisterMarkerCommandHandler - responsável por lidar com o serviço de registro de marcadores no sistema.
+* EditMarkerCommandHandler - responsável por lidar com o serviço de edição de marcadores no sistema.
+* GetMarkerCommandHandler - responsável por lidar com o serviço de obtenção de marcadores no sistema.
+* UserProfile - entidade que representa um perfil de usuário.
+* Marker - entidade que representa um marcador.
+
+Entre as portas de saída estão:
+* HashService - responsável por lidar com o serviço de realização de hash, a fim de manter o domínio independente dos algoritmos de hash utilizados. 
+* IEmailUniquenessChecker - responsável por lidar com o serviço de verificação de unicidade de e-mails, a fim de manter o domínio independente de conhecimento sobre banco de dados. 
+* UserProfileRepository - responsável por abstrair a lógica de persistência de perfis de usuários, a fim de manter o domínio independente de conhecimento sobre banco de dados. 
+* UserSessionRepository - responsável por abstrair a lógica de persistência de sessões de usuários, a fim de manter o domínio independente de conhecimento sobre banco de dados. 
+* MarkerRepository - responsável por abstrair a lógica de persistência de marcadores, a fim de manter o domínio independente de conhecimento sobre banco de dados. 
+
+
+Os outros adaptadores presentes no sistema são os que implementam as portas de saída:
+* “BcryptHashService” - implementa a porta de saída “HashService” para utilizar a biblioteca Bcrypt para realizar a criação e verificação de hashes existentes.
+* EmailUniquenessChecker - implementa a porta de saída “IEmailUniquenessChecker” para verificar se um e-mail já foi cadastrado no banco de dados SQLite.
+* SQLUserProfileRepository - implementa a porta de saída “UserProfileRepository” para realizar a lógica de persistência de perfis de usuários com base no banco de dados SQLite.
+* InMemoryUserSessionRepository - implementa a porta de saída “UserSessionRepository” para realizar a lógica de persistência de sessões de usuários com base em memória primária.
+* SQLMarkerRepository - implementa a porta de saída “MarkerRepository” para realizar a lógica de persistência de marcadores com base no banco de dados SQLite.
+
+
+Um diagrama mais completo do sistema pode ser visualizado abaixo:
+![MapMyJourney-Page-1 drawio](https://github.com/danielabadi/MapMyJourney/assets/41207094/4583e179-6d7f-426a-a372-0d06b4545ee3)
+
+
+Assim, o backend do sistema MapMyJourney é composto por uma série de adaptadores e portas, ajudando a garantir que a lógica de negócio permaneça isolada das tecnologias e frameworks utilizados, facilitando a manutenção e evolução do sistema ao longo do tempo.
+	
+## Exemplo de fluxo no sistema
+Como um exemplo mais detalhado de um fluxo no sistema que explicita o uso da arquitetura hexagonal, apresentamos o fluxo de registro de um novo usuário no sistema.
+
+O adaptador “RegisterUserController”, que lida com a requisição de registro de um novo usuário no sistema, invoca a porta de entrada “IRegisterUserCommandHandler” para interagir com o domínio do sistema:
+
+```typescript
+export class RegisterUserController implements IRegisterUserController {
+    private readonly commandHandler: IRegisterUserCommandHandler;
+
+    …
+
+    public async registerUser(req: Request, res: Response): Promise<Response> {
+       …
+
+        try {
+            const registerUserRequest: RegisterUserRequest = req.body;
+            const command: RegisterUserCommand = new RegisterUserCommand(
+                Email.create(registerUserRequest.email),
+                UserName.create(registerUserRequest.name),
+                new Date(registerUserRequest.birthdate),
+                registerUserRequest.password,
+            );
+            const createdUserId: UserId = await this.commandHandler.handle(command);
+            const registerUserResponse: RegisterUserResponse = { id: createdUserId.id };
+            return res.status(200).json({ success: true, data: registerUserResponse });
+        } catch (err) {
+            return ErrorHandler.handleStandardFailure(err, res);
+        }
+    }
+}
+```
+
+A porta de entrada “IRegisterUserCommandHandler” é implementada no domínio por “RegisterUserCommandHandler”, que é responsável por orquestrar a lógica de registro de usuários, verificando se o e-mail da requisição já não foi cadastrado por outro usuário, realizando o hash da senha do usuário e delegando a lógica de persistência do usuário. Para tal, utiliza as portas de saída “HashService”, “UserProfileRepository” e “IEmailUniquenessChecker”, mantendo o domínio limpo de tecnologia.
+
+```typescript
+export class RegisterUserCommandHandler implements IRegisterUserCommandHandler {
+    private readonly userProfileRepository: UserProfileRepository;
+    private readonly hashService: HashService;
+    private readonly emailUniquenessChecker: IEmailUniquenessChecker;
+
+    …
+
+    public async handle(command: RegisterUserCommand): Promise<UserId> {
+        const email = command.email;
+        if (await this.emailUniquenessChecker.emailExists(email)) {
+            throw new Error('Já existe um usuário cadastrado com esse email');
+        }
+
+        const name = command.name;
+        const birthdate = command.birthdate;
+        const hashedPassword: string = await this.hashService.hashPassword(command.password);
+
+        const userToBeRegistered = UserProfile.create(
+            UserId.create(uuidv4()),
+            email,
+            name,
+            birthdate,
+            UserDescription.create(''),
+            hashedPassword,
+        );
+
+        const registeredUser: UserId = await this.userProfileRepository.insert(userToBeRegistered);
+        return registeredUser;
+    }
+}
+```
+
+
+A porta de saída “UserProfileRepository”, responsável por prover uma abstração para a recuperação do perfil do usuário no banco de dados, é implementada pelo adaptador “SQLUserProfileRepository”, que interage com o banco de dados SQLite a partir da biblioteca Knex.js para recuperar o perfil de um usuário.
+
+```typescript
+export interface UserProfileRepository {
+    insert(userProfile: UserProfile): Promise<UserId>;
+    update(userProfile: UserProfile): Promise<UserId>;
+    getById(userId: UserId): Promise<UserProfile | null>;
+    getByEmail(email: Email): Promise<UserProfile | null>;
+}
+
+export class SQLUserProfileRepository implements UserProfileRepository {
+    private readonly knex: Knex;
+    private readonly tableName: string;
+
+    …
+
+    UserProfilePersistence = () => {
+        return this.knex<UserProfilePersistence>(this.tableName);
+    };
+
+    public async insert(userProfile: UserProfile): Promise<UserId> {
+        const persistenceModel: UserProfilePersistence = this.toPersistence(userProfile);
+
+        const createdUser: any[] = await this.knex.transaction(async (trx) => {
+            const createdUser = await trx<UserProfilePersistence>(this.tableName).insert(persistenceModel, 'id');
+            return createdUser;
+        });
+        const createdUserId = createdUser[0];
+
+        return UserId.create(createdUserId.id);
+    }
+
+…
+	
+}
+```
+
+Abaixo, pode ser visualizado um diagrama específico para esse fluxo:
+![MapMyJourney-Page-2](https://github.com/danielabadi/MapMyJourney/assets/41207094/a3aafb8d-d759-4e9f-a434-86d17dd8c484)
+
+
+</details>
+	
 ## Modelo das principais telas
 
 Disponível no [Figma](https://www.figma.com/proto/bbIqawSkLUC54X5gcEUYGv/MapMyJourney).
-
