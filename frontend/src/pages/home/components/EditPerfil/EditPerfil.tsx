@@ -107,7 +107,13 @@ const EditPerfil: React.FC = () => {
       values
     ) as IUserPerfilForm;
 
-    edit(validatedValues, {
+    const submittedValues = {
+      ...validatedValues,
+      newPassword: validatedValues.newPassword == '' ? undefined : validatedValues.newPassword,
+      confirmPassword: validatedValues.confirmPassword == '' ? undefined : validatedValues.confirmPassword,
+    };
+
+    edit(submittedValues, {
       onSuccess: (data: any) => {
         let newUserData: userResponseDto = {
           id: userData.id,
