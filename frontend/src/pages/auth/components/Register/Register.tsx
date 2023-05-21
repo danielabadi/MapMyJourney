@@ -30,7 +30,7 @@ const buttonStyles: SxProps<Theme> = {
   borderRadius: "5px",
   padding: "10px 15px",
   fontFamily: "Zen Kurenaido",
-  marginTop: "0px",
+  marginTop: "10px",
   fontSize: "12px",
 
   "&:hover": {
@@ -65,7 +65,7 @@ const Register = () => {
   ) => {
     const validatedValues = registerFormSchema.cast(values) as IRegisterForm;
 
-    const body = {... validatedValues, birthdate: validatedValues.birthdate}
+    const body = { ...validatedValues, birthdate: validatedValues.birthdate }
 
     register(validatedValues, {
       onSuccess: (data: any) => {
