@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 export const loginFormSchema = yup.object({
-  email: yup.string().email().required("Email é um campo obrigatório"),
+  email: yup.string().email('Insira um email válido').required("Email é um campo obrigatório"),
   password: yup.string().required("Senha é um campo obrigatório"),
 });
 
