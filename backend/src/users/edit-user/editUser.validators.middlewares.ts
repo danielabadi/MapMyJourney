@@ -38,12 +38,9 @@ export const validateEditUser: Schema = {
         },
     },
     confirmPassword: {
-        notEmpty: {
-            errorMessage: 'O campo confirmar senha é obrigatório',
-            bail: true,
-        },
+        optional: true,
         custom: {
-            options: (value, { req }) => value === req.body.password,
+            options: (value, { req }) => value === req.body.newPassword,
             errorMessage: 'Senhas não são iguais',
         },
     },
