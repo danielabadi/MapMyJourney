@@ -1,4 +1,4 @@
-import { cookieName, password, username } from "../constants/deafultTestValues"
+import { cookieName, password, username } from "../constants/defaultTestValues"
 
 describe('Login', () => {
   it('passes', () => {

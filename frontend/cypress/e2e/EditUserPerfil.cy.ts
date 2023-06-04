@@ -1,4 +1,4 @@
-import { password, userDescription, username } from "../constants/deafultTestValues"
+import { password, userDescription, username } from "../constants/defaultTestValues"
 
 beforeEach(() => {
   cy.visit('/')
