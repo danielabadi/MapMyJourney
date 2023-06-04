@@ -1,0 +1,10 @@
+export const username = 'testeE2E@email.com';
+export const password = '12345';
+export const cookieName = 'cookieName';
+export const userDescription = 'teste edit';
+export const markerTitle = 'novo marcador Quero ir';
+export const markerDescription = 'Descrição interessante';
+export const markerXPosition = 500;
+export const markerYPosition = 200;
+export const newMarkerTitle = 'Novo titulo';
+export const newMarkerDescription = 'Nova descrição';
