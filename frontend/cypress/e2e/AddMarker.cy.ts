@@ -10,12 +10,13 @@ beforeEach(() => {
 
 describe('template spec', () => {
   it('passes', () => {
+    //Adicionar marcador 1
     //Abre interface de adicionar marcador
     cy.get('.css-1rdbhjv-MuiButtonBase-root-MuiIconButton-root').click()
 
     //Preenche campos
     cy.get('#titulo').type(markerTitle)
-    cy.get(':nth-child(3) > .btn').click()
+    cy.get(':nth-child(1) > .btn').click()
     cy.get('#descricao').type(markerDescription)
 
     //Define localização no mapa
@@ -27,5 +28,48 @@ describe('template spec', () => {
     
     //Confirmar sucesso
     cy.get('[data-testid="SuccessOutlinedIcon"]').should('exist')
+    cy.get('[data-testid="CloseIcon"]').click()
+
+    //---------------------------------------------------------------------------------
+    //Adicionar marcador 2
+    //Abre interface de adicionar marcador
+    cy.get('.css-1rdbhjv-MuiButtonBase-root-MuiIconButton-root').click()
+
+    //Preenche campos
+    cy.get('#titulo').type(markerTitle)
+    cy.get(':nth-child(1) > .btn').click()
+    cy.get('#descricao').type(markerDescription)
+
+    //Define localização no mapa
+    cy.get('.pageMap-form__botoes > [type="button"]').click()
+    cy.get('#pageMap-map').click(markerXPosition + 100, markerYPosition)
+
+    //Salvar marcador
+    cy.get('[style="background-color: rgb(73, 176, 71);"]').click()
+    
+    //Confirmar sucesso
+    cy.get('[data-testid="SuccessOutlinedIcon"]').should('exist')
+    cy.get('[data-testid="CloseIcon"]').click()
+
+    //---------------------------------------------------------------------------------
+    //Adicionar marcador 3
+    //Abre interface de adicionar marcador
+    cy.get('.css-1rdbhjv-MuiButtonBase-root-MuiIconButton-root').click()
+
+    //Preenche campos
+    cy.get('#titulo').type(markerTitle)
+    cy.get(':nth-child(2) > .btn').click()
+    cy.get('#descricao').type(markerDescription)
+
+    //Define localização no mapa
+    cy.get('.pageMap-form__botoes > [type="button"]').click()
+    cy.get('#pageMap-map').click(markerXPosition + 200, markerYPosition)
+
+    //Salvar marcador
+    cy.get('[style="background-color: rgb(73, 176, 71);"]').click()
+    
+    //Confirmar sucesso
+    cy.get('[data-testid="SuccessOutlinedIcon"]').should('exist')
+    cy.get('[data-testid="CloseIcon"]').click()
   })
 })

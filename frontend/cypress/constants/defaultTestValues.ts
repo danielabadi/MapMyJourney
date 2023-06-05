@@ -1,3 +1,4 @@
+export const name = 'testeE2E';
 export const username = 'testeE2E@email.com';
 export const password = '12345';
 export const cookieName = 'cookieName';

@@ -37,7 +37,7 @@ describe('Lista de marcadores', () => {
     //Checar número de elementos na lista
     cy.get('.MuiList-root').find('.MuiListItemIcon-root').should('have.length', 0)
 
-    //Filtrar por status Planejad
+    //Filtrar por status Planejado
     cy.get('.css-1xhj18k > :nth-child(1) > .MuiButtonBase-root').click()
     cy.get('.MuiFormGroup-root > :nth-child(2)').click()
     cy.get('.MuiFormGroup-root > :nth-child(3)').click()
