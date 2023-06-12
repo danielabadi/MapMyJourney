@@ -1,0 +1,864 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1686605930787" clover="3.2.0">
+  <project timestamp="1686605930788" name="All files">
+    <metrics statements="660" coveredstatements="581" conditionals="78" coveredconditionals="51" methods="213" coveredmethods="188" elements="951" coveredelements="820" complexity="0" loc="660" ncloc="660" packages="17" files="49" classes="49"/>
+    <package name="src">
+      <metrics statements="36" coveredstatements="34" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="6"/>
+      <file name="AppRouter.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\AppRouter.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="1" count="10" type="stmt"/>
+        <line num="4" count="10" type="stmt"/>
+        <line num="5" count="10" type="stmt"/>
+        <line num="7" count="17" type="stmt"/>
+        <line num="9" count="17" type="stmt"/>
+        <line num="10" count="17" type="stmt"/>
+        <line num="11" count="17" type="stmt"/>
+        <line num="12" count="17" type="stmt"/>
+      </file>
+      <file name="app.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\app.ts">
+        <metrics statements="28" coveredstatements="26" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="4"/>
+        <line num="1" count="10" type="stmt"/>
+        <line num="2" count="10" type="stmt"/>
+        <line num="3" count="10" type="stmt"/>
+        <line num="4" count="10" type="stmt"/>
+        <line num="5" count="10" type="stmt"/>
+        <line num="6" count="10" type="stmt"/>
+        <line num="7" count="10" type="stmt"/>
+        <line num="8" count="10" type="stmt"/>
+        <line num="9" count="10" type="stmt"/>
+        <line num="10" count="10" type="stmt"/>
+        <line num="11" count="10" type="stmt"/>
+        <line num="12" count="17" type="stmt"/>
+        <line num="15" count="17" type="stmt"/>
+        <line num="16" count="17" type="stmt"/>
+        <line num="20" count="17" type="stmt"/>
+        <line num="21" count="17" type="stmt"/>
+        <line num="22" count="17" type="stmt"/>
+        <line num="23" count="17" type="stmt"/>
+        <line num="24" count="17" type="stmt"/>
+        <line num="30" count="17" type="stmt"/>
+        <line num="31" count="17" type="stmt"/>
+        <line num="35" count="7" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="47" count="10" type="stmt"/>
+        <line num="48" count="10" type="stmt"/>
+        <line num="49" count="10" type="stmt"/>
+        <line num="51" count="10" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.common">
+      <metrics statements="8" coveredstatements="5" conditionals="1" coveredconditionals="0" methods="5" coveredmethods="3"/>
+      <file name="FileSystemConfig.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\common\FileSystemConfig.ts">
+        <metrics statements="8" coveredstatements="5" conditionals="1" coveredconditionals="0" methods="5" coveredmethods="3"/>
+        <line num="1" count="10" type="stmt"/>
+        <line num="8" count="18" type="stmt"/>
+        <line num="9" count="18" type="stmt"/>
+        <line num="12" count="18" type="stmt"/>
+        <line num="16" count="28" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="22" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.errors">
+      <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
+      <file name="ErrorHandler.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\errors\ErrorHandler.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
+        <line num="3" count="10" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="10" count="4" type="cond" truecount="1" falsecount="1"/>
+      </file>
+    </package>
+    <package name="src.markers">
+      <metrics statements="39" coveredstatements="37" conditionals="1" coveredconditionals="0" methods="13" coveredmethods="12"/>
+      <file name="MarkersRouter.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\markers\MarkersRouter.ts">
+        <metrics statements="39" coveredstatements="37" conditionals="1" coveredconditionals="0" methods="13" coveredmethods="12"/>
+        <line num="1" count="10" type="stmt"/>
+        <line num="3" count="10" type="stmt"/>
+        <line num="4" count="10" type="stmt"/>
+        <line num="6" count="10" type="stmt"/>
+        <line num="7" count="10" type="stmt"/>
+        <line num="8" count="10" type="stmt"/>
+        <line num="9" count="10" type="stmt"/>
+        <line num="10" count="10" type="stmt"/>
+        <line num="11" count="10" type="stmt"/>
+        <line num="12" count="10" type="stmt"/>
+        <line num="13" count="10" type="stmt"/>
+        <line num="15" count="10" type="stmt"/>
+        <line num="16" count="11" type="stmt"/>
+        <line num="18" count="17" type="stmt"/>
+        <line num="24" count="17" type="stmt"/>
+        <line num="29" count="4" type="stmt"/>
+        <line num="39" count="17" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="50" count="17" type="stmt"/>
+        <line num="51" count="3" type="stmt"/>
+        <line num="56" count="34" type="stmt"/>
+        <line num="58" count="11" type="stmt"/>
+        <line num="61" count="11" type="stmt"/>
+        <line num="62" count="11" type="stmt"/>
+        <line num="63" count="11" type="stmt"/>
+        <line num="66" count="34" type="stmt"/>
+        <line num="68" count="34" type="stmt"/>
+        <line num="71" count="11" type="cond" truecount="0" falsecount="1"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="75" count="11" type="stmt"/>
+        <line num="81" count="17" type="stmt"/>
+        <line num="83" count="17" type="stmt"/>
+        <line num="90" count="17" type="stmt"/>
+        <line num="93" count="17" type="stmt"/>
+        <line num="95" count="17" type="stmt"/>
+        <line num="98" count="17" type="stmt"/>
+        <line num="100" count="17" type="stmt"/>
+        <line num="103" count="17" type="stmt"/>
+        <line num="105" count="17" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.markers.edit-marker">
+      <metrics statements="50" coveredstatements="15" conditionals="5" coveredconditionals="0" methods="12" coveredmethods="4"/>
+      <file name="EditMarkerCommand.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\markers\edit-marker\EditMarkerCommand.ts">
+        <metrics statements="19" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="9" count="10" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+      </file>
+      <file name="EditMarkerCommandHandler.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\markers\edit-marker\EditMarkerCommandHandler.ts">
+        <metrics statements="9" coveredstatements="3" conditionals="1" coveredconditionals="0" methods="3" coveredmethods="2"/>
+        <line num="9" count="17" type="stmt"/>
+        <line num="10" count="17" type="stmt"/>
+        <line num="13" count="17" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+      </file>
+      <file name="EditMarkerController.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\markers\edit-marker\EditMarkerController.ts">
+        <metrics statements="22" coveredstatements="11" conditionals="4" coveredconditionals="0" methods="7" coveredmethods="2"/>
+        <line num="2" count="10" type="stmt"/>
+        <line num="3" count="10" type="stmt"/>
+        <line num="5" count="10" type="stmt"/>
+        <line num="6" count="10" type="stmt"/>
+        <line num="7" count="10" type="stmt"/>
+        <line num="8" count="10" type="stmt"/>
+        <line num="9" count="10" type="stmt"/>
+        <line num="10" count="10" type="stmt"/>
+        <line num="19" count="17" type="stmt"/>
+        <line num="20" count="17" type="stmt"/>
+        <line num="23" count="17" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.markers.get-marker">
+      <metrics statements="19" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="11"/>
+      <file name="GetMarkerCommand.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\markers\get-marker\GetMarkerCommand.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="4" count="10" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+      </file>
+      <file name="GetMarkerCommandHandler.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\markers\get-marker\GetMarkerCommandHandler.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="8" count="17" type="stmt"/>
+        <line num="9" count="17" type="stmt"/>
+        <line num="12" count="17" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+      </file>
+      <file name="GetMarkerController.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\markers\get-marker\GetMarkerController.ts">
+        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
+        <line num="2" count="10" type="stmt"/>
+        <line num="4" count="10" type="stmt"/>
+        <line num="12" count="17" type="stmt"/>
+        <line num="13" count="17" type="stmt"/>
+        <line num="16" count="17" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="27" count="3" type="stmt"/>
+        <line num="38" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.markers.marker">
+      <metrics statements="128" coveredstatements="109" conditionals="33" coveredconditionals="23" methods="42" coveredmethods="38"/>
+      <file name="Marker.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\markers\marker\Marker.ts">
+        <metrics statements="27" coveredstatements="27" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4"/>
+        <line num="8" count="22" type="stmt"/>
+        <line num="9" count="22" type="stmt"/>
+        <line num="10" count="22" type="stmt"/>
+        <line num="11" count="22" type="stmt"/>
+        <line num="12" count="22" type="stmt"/>
+        <line num="13" count="22" type="stmt"/>
+        <line num="14" count="22" type="stmt"/>
+        <line num="15" count="22" type="stmt"/>
+        <line num="16" count="22" type="stmt"/>
+        <line num="17" count="22" type="stmt"/>
+        <line num="30" count="22" type="stmt"/>
+        <line num="31" count="22" type="stmt"/>
+        <line num="32" count="22" type="stmt"/>
+        <line num="33" count="22" type="stmt"/>
+        <line num="34" count="22" type="stmt"/>
+        <line num="35" count="22" type="stmt"/>
+        <line num="36" count="22" type="stmt"/>
+        <line num="37" count="22" type="stmt"/>
+        <line num="38" count="22" type="stmt"/>
+        <line num="52" count="22" type="cond" truecount="1" falsecount="0"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="55" count="21" type="stmt"/>
+        <line num="69" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="72" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+      </file>
+      <file name="MarkerId.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\markers\marker\MarkerId.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="1" coveredconditionals="1" methods="4" coveredmethods="4"/>
+        <line num="1" count="12" type="stmt"/>
+        <line num="3" count="32" type="stmt"/>
+        <line num="4" count="31" type="stmt"/>
+        <line num="7" count="31" type="stmt"/>
+        <line num="11" count="32" type="stmt"/>
+        <line num="15" count="32" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="31" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+      </file>
+      <file name="MarkerPhoto.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\markers\marker\MarkerPhoto.ts">
+        <metrics statements="7" coveredstatements="6" conditionals="1" coveredconditionals="1" methods="4" coveredmethods="4"/>
+        <line num="1" count="54" type="stmt"/>
+        <line num="2" count="54" type="stmt"/>
+        <line num="5" count="54" type="stmt"/>
+        <line num="9" count="54" type="stmt"/>
+        <line num="13" count="54" type="cond" truecount="1" falsecount="0"/>
+        <line num="14" count="54" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+      </file>
+      <file name="MarkerPosition.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\markers\marker\MarkerPosition.ts">
+        <metrics statements="9" coveredstatements="9" conditionals="7" coveredconditionals="7" methods="4" coveredmethods="4"/>
+        <line num="1" count="28" type="stmt"/>
+        <line num="2" count="25" type="stmt"/>
+        <line num="3" count="25" type="stmt"/>
+        <line num="6" count="25" type="stmt"/>
+        <line num="7" count="25" type="stmt"/>
+        <line num="11" count="28" type="cond" truecount="6" falsecount="0"/>
+        <line num="15" count="28" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="25" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+      </file>
+      <file name="MarkerRepository.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\markers\marker\MarkerRepository.ts">
+        <metrics statements="63" coveredstatements="46" conditionals="17" coveredconditionals="7" methods="18" coveredmethods="14"/>
+        <line num="3" count="10" type="stmt"/>
+        <line num="4" count="10" type="stmt"/>
+        <line num="5" count="10" type="stmt"/>
+        <line num="7" count="10" type="stmt"/>
+        <line num="9" count="10" type="stmt"/>
+        <line num="10" count="10" type="stmt"/>
+        <line num="11" count="10" type="stmt"/>
+        <line num="20" count="18" type="stmt"/>
+        <line num="21" count="18" type="stmt"/>
+        <line num="22" count="18" type="stmt"/>
+        <line num="23" count="18" type="stmt"/>
+        <line num="24" count="18" type="stmt"/>
+        <line num="32" count="18" type="stmt"/>
+        <line num="33" count="18" type="stmt"/>
+        <line num="34" count="18" type="stmt"/>
+        <line num="35" count="18" type="stmt"/>
+        <line num="38" count="18" type="stmt"/>
+        <line num="39" count="9" type="stmt"/>
+        <line num="42" count="18" type="stmt"/>
+        <line num="43" count="10" type="stmt"/>
+        <line num="47" count="7" type="stmt"/>
+        <line num="49" count="7" type="stmt"/>
+        <line num="50" count="7" type="stmt"/>
+        <line num="52" count="7" type="stmt"/>
+        <line num="53" count="13" type="stmt"/>
+        <line num="55" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="56" count="5" type="stmt"/>
+        <line num="58" count="7" type="stmt"/>
+        <line num="60" count="7" type="stmt"/>
+        <line num="62" count="7" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="79" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="88" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="96" count="0" type="stmt"/>
+        <line num="100" count="5" type="stmt"/>
+        <line num="102" count="5" type="cond" truecount="0" falsecount="1"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="105" count="5" type="stmt"/>
+        <line num="110" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="112" count="5" type="stmt"/>
+        <line num="116" count="4" type="stmt"/>
+        <line num="118" count="4" type="cond" truecount="0" falsecount="1"/>
+        <line num="119" count="0" type="stmt"/>
+        <line num="122" count="4" type="stmt"/>
+        <line num="123" count="5" type="stmt"/>
+        <line num="127" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="129" count="4" type="stmt"/>
+        <line num="131" count="4" type="stmt"/>
+        <line num="135" count="10" type="stmt"/>
+        <line num="144" count="16" type="stmt"/>
+        <line num="149" count="7" type="stmt"/>
+        <line num="163" count="13" type="stmt"/>
+      </file>
+      <file name="MarkerStatus.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\markers\marker\MarkerStatus.ts">
+        <metrics statements="7" coveredstatements="6" conditionals="1" coveredconditionals="1" methods="4" coveredmethods="4"/>
+        <line num="1" count="24" type="stmt"/>
+        <line num="2" count="24" type="stmt"/>
+        <line num="5" count="24" type="stmt"/>
+        <line num="9" count="24" type="stmt"/>
+        <line num="13" count="24" type="cond" truecount="1" falsecount="0"/>
+        <line num="14" count="24" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+      </file>
+      <file name="MarkerTitle.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\markers\marker\MarkerTitle.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4"/>
+        <line num="1" count="25" type="stmt"/>
+        <line num="2" count="24" type="stmt"/>
+        <line num="5" count="24" type="stmt"/>
+        <line num="9" count="25" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="25" type="cond" truecount="1" falsecount="0"/>
+        <line num="14" count="24" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.markers.register-marker">
+      <metrics statements="48" coveredstatements="47" conditionals="4" coveredconditionals="2" methods="12" coveredmethods="12"/>
+      <file name="RegisterMarkerCommand.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\markers\register-marker\RegisterMarkerCommand.ts">
+        <metrics statements="17" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="8" count="10" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="28" count="4" type="stmt"/>
+        <line num="29" count="4" type="stmt"/>
+        <line num="30" count="4" type="stmt"/>
+        <line num="31" count="4" type="stmt"/>
+        <line num="32" count="4" type="stmt"/>
+        <line num="33" count="4" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="35" count="4" type="stmt"/>
+      </file>
+      <file name="RegisterMarkerCommandHandler.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\markers\register-marker\RegisterMarkerCommandHandler.ts">
+        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="1" count="10" type="stmt"/>
+        <line num="3" count="10" type="stmt"/>
+        <line num="4" count="10" type="stmt"/>
+        <line num="10" count="17" type="stmt"/>
+        <line num="11" count="17" type="stmt"/>
+        <line num="14" count="17" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="30" count="4" type="stmt"/>
+        <line num="31" count="4" type="stmt"/>
+        <line num="32" count="4" type="stmt"/>
+      </file>
+      <file name="RegisterMarkerController.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\markers\register-marker\RegisterMarkerController.ts">
+        <metrics statements="21" coveredstatements="20" conditionals="4" coveredconditionals="2" methods="7" coveredmethods="7"/>
+        <line num="2" count="10" type="stmt"/>
+        <line num="3" count="10" type="stmt"/>
+        <line num="5" count="10" type="stmt"/>
+        <line num="6" count="10" type="stmt"/>
+        <line num="7" count="10" type="stmt"/>
+        <line num="8" count="10" type="stmt"/>
+        <line num="9" count="10" type="stmt"/>
+        <line num="18" count="17" type="stmt"/>
+        <line num="19" count="17" type="stmt"/>
+        <line num="22" count="17" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+        <line num="27" count="6" type="stmt"/>
+        <line num="28" count="4" type="stmt"/>
+        <line num="29" count="4" type="stmt"/>
+        <line num="37" count="6" type="stmt"/>
+        <line num="40" count="4" type="stmt"/>
+        <line num="41" count="4" type="stmt"/>
+        <line num="42" count="4" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="49" count="4" type="stmt"/>
+        <line num="60" count="6" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.users">
+      <metrics statements="52" coveredstatements="51" conditionals="0" coveredconditionals="0" methods="15" coveredmethods="14"/>
+      <file name="UsersRouter.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\UsersRouter.ts">
+        <metrics statements="52" coveredstatements="51" conditionals="0" coveredconditionals="0" methods="15" coveredmethods="14"/>
+        <line num="1" count="10" type="stmt"/>
+        <line num="2" count="10" type="stmt"/>
+        <line num="4" count="10" type="stmt"/>
+        <line num="5" count="10" type="stmt"/>
+        <line num="6" count="10" type="stmt"/>
+        <line num="7" count="10" type="stmt"/>
+        <line num="8" count="10" type="stmt"/>
+        <line num="9" count="10" type="stmt"/>
+        <line num="10" count="10" type="stmt"/>
+        <line num="11" count="10" type="stmt"/>
+        <line num="12" count="10" type="stmt"/>
+        <line num="13" count="10" type="stmt"/>
+        <line num="14" count="10" type="stmt"/>
+        <line num="15" count="10" type="stmt"/>
+        <line num="16" count="10" type="stmt"/>
+        <line num="17" count="10" type="stmt"/>
+        <line num="18" count="10" type="stmt"/>
+        <line num="19" count="10" type="stmt"/>
+        <line num="20" count="10" type="stmt"/>
+        <line num="21" count="10" type="stmt"/>
+        <line num="23" count="10" type="stmt"/>
+        <line num="24" count="10" type="stmt"/>
+        <line num="26" count="20" type="stmt"/>
+        <line num="27" count="10" type="stmt"/>
+        <line num="29" count="17" type="stmt"/>
+        <line num="31" count="17" type="stmt"/>
+        <line num="32" count="19" type="stmt"/>
+        <line num="37" count="17" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="43" count="17" type="stmt"/>
+        <line num="48" count="3" type="stmt"/>
+        <line num="54" count="17" type="stmt"/>
+        <line num="55" count="3" type="stmt"/>
+        <line num="60" count="17" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="66" count="17" type="stmt"/>
+        <line num="68" count="17" type="stmt"/>
+        <line num="69" count="17" type="stmt"/>
+        <line num="70" count="17" type="stmt"/>
+        <line num="71" count="17" type="stmt"/>
+        <line num="74" count="17" type="stmt"/>
+        <line num="76" count="17" type="stmt"/>
+        <line num="79" count="17" type="stmt"/>
+        <line num="81" count="17" type="stmt"/>
+        <line num="84" count="17" type="stmt"/>
+        <line num="86" count="17" type="stmt"/>
+        <line num="87" count="17" type="stmt"/>
+        <line num="92" count="17" type="stmt"/>
+        <line num="93" count="17" type="stmt"/>
+        <line num="95" count="17" type="stmt"/>
+        <line num="96" count="17" type="stmt"/>
+        <line num="98" count="17" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.users.edit-user">
+      <metrics statements="42" coveredstatements="40" conditionals="6" coveredconditionals="3" methods="11" coveredmethods="11"/>
+      <file name="EditUserCommand.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\edit-user\EditUserCommand.ts">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="6" count="10" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+      </file>
+      <file name="EditUserCommandHandler.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\edit-user\EditUserCommandHandler.ts">
+        <metrics statements="11" coveredstatements="10" conditionals="3" coveredconditionals="1" methods="4" coveredmethods="4"/>
+        <line num="11" count="17" type="stmt"/>
+        <line num="12" count="17" type="stmt"/>
+        <line num="13" count="17" type="stmt"/>
+        <line num="16" count="17" type="stmt"/>
+        <line num="17" count="17" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="22" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="38" count="2" type="cond" truecount="1" falsecount="1"/>
+      </file>
+      <file name="EditUserController.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\edit-user\EditUserController.ts">
+        <metrics statements="18" coveredstatements="17" conditionals="3" coveredconditionals="2" methods="3" coveredmethods="3"/>
+        <line num="2" count="10" type="stmt"/>
+        <line num="3" count="10" type="stmt"/>
+        <line num="4" count="10" type="stmt"/>
+        <line num="6" count="10" type="stmt"/>
+        <line num="7" count="10" type="stmt"/>
+        <line num="16" count="17" type="stmt"/>
+        <line num="17" count="17" type="stmt"/>
+        <line num="20" count="17" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="25" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+      </file>
+      <file name="editUser.validators.middlewares.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\edit-user\editUser.validators.middlewares.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="3" count="17" type="stmt"/>
+        <line num="43" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.users.get-user">
+      <metrics statements="18" coveredstatements="9" conditionals="2" coveredconditionals="0" methods="9" coveredmethods="4"/>
+      <file name="GetUserCommand.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\get-user\GetUserCommand.ts">
+        <metrics statements="3" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="4" count="10" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+      </file>
+      <file name="GetUserCommandHandler.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\get-user\GetUserCommandHandler.ts">
+        <metrics statements="4" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
+        <line num="9" count="17" type="stmt"/>
+        <line num="10" count="17" type="stmt"/>
+        <line num="13" count="17" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+      </file>
+      <file name="GetUserController.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\get-user\GetUserController.ts">
+        <metrics statements="11" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="2"/>
+        <line num="2" count="10" type="stmt"/>
+        <line num="4" count="10" type="stmt"/>
+        <line num="12" count="17" type="stmt"/>
+        <line num="13" count="17" type="stmt"/>
+        <line num="16" count="17" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.users.hash-service">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="HashService.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\hash-service\HashService.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="1" count="11" type="stmt"/>
+        <line num="8" count="28" type="stmt"/>
+        <line num="10" count="34" type="stmt"/>
+        <line num="14" count="17" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.users.register-user">
+      <metrics statements="49" coveredstatements="49" conditionals="2" coveredconditionals="2" methods="10" coveredmethods="10"/>
+      <file name="RegisterUserCommand.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\register-user\RegisterUserCommand.ts">
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="5" count="10" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+      </file>
+      <file name="RegisterUserCommandHandler.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\register-user\RegisterUserCommandHandler.ts">
+        <metrics statements="20" coveredstatements="20" conditionals="1" coveredconditionals="1" methods="3" coveredmethods="3"/>
+        <line num="1" count="10" type="stmt"/>
+        <line num="2" count="10" type="stmt"/>
+        <line num="8" count="10" type="stmt"/>
+        <line num="9" count="10" type="stmt"/>
+        <line num="14" count="17" type="stmt"/>
+        <line num="15" count="17" type="stmt"/>
+        <line num="16" count="17" type="stmt"/>
+        <line num="17" count="17" type="stmt"/>
+        <line num="24" count="17" type="stmt"/>
+        <line num="25" count="17" type="stmt"/>
+        <line num="26" count="17" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="31" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+      </file>
+      <file name="RegisterUserController.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\register-user\RegisterUserController.ts">
+        <metrics statements="18" coveredstatements="18" conditionals="1" coveredconditionals="1" methods="3" coveredmethods="3"/>
+        <line num="2" count="10" type="stmt"/>
+        <line num="3" count="10" type="stmt"/>
+        <line num="4" count="10" type="stmt"/>
+        <line num="6" count="10" type="stmt"/>
+        <line num="7" count="10" type="stmt"/>
+        <line num="16" count="17" type="stmt"/>
+        <line num="17" count="17" type="stmt"/>
+        <line num="20" count="17" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="25" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+      </file>
+      <file name="registerUser.validators.middlewares.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\register-user\registerUser.validators.middlewares.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="3" count="17" type="stmt"/>
+        <line num="49" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.users.user-access.login">
+      <metrics statements="19" coveredstatements="18" conditionals="2" coveredconditionals="1" methods="5" coveredmethods="5"/>
+      <file name="LoginController.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\user-access\login\LoginController.ts">
+        <metrics statements="18" coveredstatements="17" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="4"/>
+        <line num="2" count="10" type="stmt"/>
+        <line num="3" count="10" type="stmt"/>
+        <line num="4" count="10" type="stmt"/>
+        <line num="13" count="17" type="stmt"/>
+        <line num="14" count="17" type="stmt"/>
+        <line num="17" count="17" type="stmt"/>
+        <line num="21" count="19" type="stmt"/>
+        <line num="22" count="19" type="cond" truecount="1" falsecount="0"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="25" count="18" type="stmt"/>
+        <line num="26" count="18" type="stmt"/>
+        <line num="27" count="18" type="stmt"/>
+        <line num="31" count="15" type="stmt"/>
+        <line num="32" count="15" type="cond" truecount="0" falsecount="1"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="36" count="15" type="stmt"/>
+        <line num="37" count="15" type="stmt"/>
+        <line num="39" count="3" type="stmt"/>
+      </file>
+      <file name="login.validators.middlewares.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\user-access\login\login.validators.middlewares.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="17" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.users.user-access.logout">
+      <metrics statements="11" coveredstatements="9" conditionals="1" coveredconditionals="0" methods="4" coveredmethods="4"/>
+      <file name="LogoutController.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\user-access\logout\LogoutController.ts">
+        <metrics statements="11" coveredstatements="9" conditionals="1" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="2" count="10" type="stmt"/>
+        <line num="9" count="17" type="stmt"/>
+        <line num="10" count="17" type="stmt"/>
+        <line num="13" count="17" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.users.user-access.user-session">
+      <metrics statements="47" coveredstatements="45" conditionals="6" coveredconditionals="6" methods="15" coveredmethods="14"/>
+      <file name="UserSession.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\user-access\user-session\UserSession.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="5" count="15" type="stmt"/>
+        <line num="6" count="15" type="stmt"/>
+        <line num="7" count="15" type="stmt"/>
+        <line num="8" count="15" type="stmt"/>
+        <line num="11" count="15" type="stmt"/>
+        <line num="12" count="15" type="stmt"/>
+        <line num="13" count="15" type="stmt"/>
+      </file>
+      <file name="UserSessionRepository.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\user-access\user-session\UserSessionRepository.ts">
+        <metrics statements="10" coveredstatements="8" conditionals="1" coveredconditionals="1" methods="4" coveredmethods="3"/>
+        <line num="10" count="17" type="stmt"/>
+        <line num="11" count="17" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="18" count="15" type="stmt"/>
+        <line num="19" count="15" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+      </file>
+      <file name="UserSessionService.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\user-access\user-session\UserSessionService.ts">
+        <metrics statements="21" coveredstatements="21" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4"/>
+        <line num="5" count="10" type="stmt"/>
+        <line num="13" count="17" type="stmt"/>
+        <line num="14" count="17" type="stmt"/>
+        <line num="15" count="17" type="stmt"/>
+        <line num="16" count="17" type="stmt"/>
+        <line num="23" count="17" type="stmt"/>
+        <line num="24" count="17" type="stmt"/>
+        <line num="25" count="17" type="stmt"/>
+        <line num="30" count="18" type="stmt"/>
+        <line num="31" count="18" type="stmt"/>
+        <line num="32" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="36" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="40" count="16" type="stmt"/>
+        <line num="41" count="16" type="stmt"/>
+        <line num="42" count="16" type="cond" truecount="1" falsecount="0"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="46" count="15" type="stmt"/>
+        <line num="47" count="15" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+      </file>
+      <file name="checkSession.middleware.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\user-access\user-session\checkSession.middleware.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
+        <line num="3" count="102" type="stmt"/>
+        <line num="4" count="17" type="cond" truecount="1" falsecount="0"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="7" count="12" type="stmt"/>
+        <line num="10" count="34" type="stmt"/>
+        <line num="11" count="24" type="cond" truecount="1" falsecount="0"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="14" count="22" type="stmt"/>
+      </file>
+      <file name="sessions.config.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\user-access\user-session\sessions.config.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="17" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.users.user-profile">
+      <metrics statements="86" coveredstatements="86" conditionals="13" coveredconditionals="13" methods="34" coveredmethods="34"/>
+      <file name="Email.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\user-profile\Email.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="1" coveredconditionals="1" methods="4" coveredmethods="4"/>
+        <line num="1" count="12" type="stmt"/>
+        <line num="3" count="59" type="stmt"/>
+        <line num="4" count="58" type="stmt"/>
+        <line num="7" count="58" type="stmt"/>
+        <line num="11" count="59" type="stmt"/>
+        <line num="15" count="59" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="58" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+      </file>
+      <file name="EmailUniquenessChecker.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\user-profile\EmailUniquenessChecker.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="8" count="19" type="stmt"/>
+        <line num="9" count="19" type="stmt"/>
+        <line num="12" count="19" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+      </file>
+      <file name="UserDescription.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\user-profile\UserDescription.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4"/>
+        <line num="1" count="46" type="stmt"/>
+        <line num="2" count="45" type="stmt"/>
+        <line num="5" count="45" type="stmt"/>
+        <line num="9" count="46" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="46" type="cond" truecount="1" falsecount="0"/>
+        <line num="14" count="45" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+      </file>
+      <file name="UserId.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\user-profile\UserId.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="1" coveredconditionals="1" methods="4" coveredmethods="4"/>
+        <line num="1" count="13" type="stmt"/>
+        <line num="3" count="70" type="stmt"/>
+        <line num="4" count="69" type="stmt"/>
+        <line num="7" count="69" type="stmt"/>
+        <line num="11" count="70" type="stmt"/>
+        <line num="15" count="70" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="69" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+      </file>
+      <file name="UserName.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\user-profile\UserName.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4"/>
+        <line num="1" count="43" type="stmt"/>
+        <line num="2" count="42" type="stmt"/>
+        <line num="5" count="42" type="stmt"/>
+        <line num="9" count="43" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="43" type="cond" truecount="1" falsecount="0"/>
+        <line num="14" count="42" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+      </file>
+      <file name="UserProfile.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\user-profile\UserProfile.ts">
+        <metrics statements="17" coveredstatements="17" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4"/>
+        <line num="6" count="33" type="stmt"/>
+        <line num="7" count="40" type="stmt"/>
+        <line num="8" count="40" type="stmt"/>
+        <line num="9" count="40" type="stmt"/>
+        <line num="10" count="40" type="stmt"/>
+        <line num="11" count="40" type="stmt"/>
+        <line num="12" count="40" type="stmt"/>
+        <line num="22" count="40" type="stmt"/>
+        <line num="23" count="40" type="stmt"/>
+        <line num="24" count="40" type="stmt"/>
+        <line num="25" count="40" type="stmt"/>
+        <line num="26" count="40" type="stmt"/>
+        <line num="27" count="40" type="stmt"/>
+        <line num="38" count="33" type="stmt"/>
+        <line num="48" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="52" count="7" type="stmt"/>
+      </file>
+      <file name="UserProfileRepository.ts" path="C:\Users\danie\Desktop\MapMyJourney\backend\src\users\user-profile\UserProfileRepository.ts">
+        <metrics statements="35" coveredstatements="35" conditionals="2" coveredconditionals="2" methods="11" coveredmethods="11"/>
+        <line num="2" count="10" type="stmt"/>
+        <line num="3" count="10" type="stmt"/>
+        <line num="4" count="10" type="stmt"/>
+        <line num="6" count="10" type="stmt"/>
+        <line num="7" count="10" type="stmt"/>
+        <line num="16" count="27" type="stmt"/>
+        <line num="17" count="27" type="stmt"/>
+        <line num="18" count="27" type="stmt"/>
+        <line num="21" count="27" type="stmt"/>
+        <line num="22" count="27" type="stmt"/>
+        <line num="25" count="27" type="stmt"/>
+        <line num="26" count="30" type="stmt"/>
+        <line num="30" count="5" type="stmt"/>
+        <line num="32" count="5" type="stmt"/>
+        <line num="33" count="5" type="stmt"/>
+        <line num="34" count="5" type="stmt"/>
+        <line num="36" count="5" type="stmt"/>
+        <line num="38" count="5" type="stmt"/>
+        <line num="42" count="3" type="stmt"/>
+        <line num="44" count="3" type="stmt"/>
+        <line num="45" count="3" type="stmt"/>
+        <line num="48" count="3" type="stmt"/>
+        <line num="50" count="3" type="stmt"/>
+        <line num="52" count="3" type="stmt"/>
+        <line num="56" count="6" type="stmt"/>
+        <line num="58" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="61" count="5" type="stmt"/>
+        <line num="63" count="5" type="stmt"/>
+        <line num="67" count="24" type="stmt"/>
+        <line num="69" count="24" type="cond" truecount="1" falsecount="0"/>
+        <line num="70" count="5" type="stmt"/>
+        <line num="73" count="19" type="stmt"/>
+        <line num="77" count="24" type="stmt"/>
+        <line num="88" count="8" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
