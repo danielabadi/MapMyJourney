@@ -23,6 +23,7 @@ describe('User edit without login', () => {
             description: 'description',
             birthdate: '1984-09-11',
             password: 'password',
+            newPassword: 'password',
             confirmPassword: 'password',
         };
         const res = await request(app).put(USERS_ROUTE).send(editUserBody);
@@ -38,6 +39,7 @@ describe('User edit with login, changing valid name, birthdate and description, 
             birthdate: '1992-03-01',
             description: 'description',
             password: 'user-teste',
+            newPassword: 'user-teste',
             confirmPassword: 'user-teste',
         };
         const res = await agent.put(USERS_ROUTE).send(editUserBody);
@@ -54,7 +56,7 @@ describe('User edit with login, changing valid name, birthdate and description, 
             description: 'description',
             birthdate: '1991-03-01',
             password: 'user-teste',
-            confirmPassword: 'user-teste',
+            confirmPassword: 'newPass',
             newPassword: 'newPass',
         };
         const res = await agent.put(USERS_ROUTE).send(editUserBody);

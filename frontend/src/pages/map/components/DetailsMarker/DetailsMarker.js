@@ -49,7 +49,7 @@ function DetailsMarker(props) {
                         <MdClose size={'30px'} color="#808080" className="details_marker_close" onClick={() => handleClick()}></MdClose>
                         <div className="details_marker_elements">
                             <h1>{marker.title}</h1>
-                            {marker.photos.length > 2 &&
+                            {marker.photos.length > 1 &&
                                 <Carousel showArrows={true} className="Carousel">
                                     {marker.photos.map(element => (
                                         <div key={element}>
