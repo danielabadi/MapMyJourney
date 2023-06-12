@@ -11,10 +11,10 @@
     "create-migration": "npx knex migrate:make --knexfile ./DbConfig.ts -x ts",
     "run-migrations": "npx knex migrate:latest --knexfile ./DbConfig.ts",
     "test:unit": "jest ./tests/unit/",
-    "test:integration": "jest ./tests/integration/",
+    "test:integration": "jest ./tests/integration/ --runInBand",
     "test:unit:coverage": "jest ./tests/unit/ --coverage --collectCoverageFrom=\"./src/**\"",
-    "test:integration:coverage": "jest ./tests/integration/ --coverage --collectCoverageFrom=\"./src/**\"",
-    "test:all:coverage": "jest ./tests/integration/ ./tests/unit/ --coverage --collectCoverageFrom=\"./src/**\""
+    "test:integration:coverage": "jest ./tests/integration/ --coverage --runInBand --collectCoverageFrom=\"./src/**\"",
+    "test:all:coverage": "jest ./tests/integration/ ./tests/unit/ --coverage --runInBand --collectCoverageFrom=\"./src/**\""
   },
   "repository": {
     "type": "git",
